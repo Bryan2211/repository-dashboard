@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        ===
+        This comment should NOT be removed.
+
+        Charisma v2.0.0
+
+        Copyright 2012-2014 Muhammad Usman
+        Licensed under the Apache License v2.0
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        http://usman.it
+        http://twitter.com/halalit_usman
+        ===
+    -->
+    <meta charset="utf-8">
+    <title>Webmath</title>
+
+    <!-- Styles -->
+    <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet">
+
+    <link href="css/charisma-app.css" rel="stylesheet">
+    <link href='bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='css/jquery.noty.css' rel='stylesheet'>
+    <link href='css/noty_theme_default.css' rel='stylesheet'>
+    <link href='css/elfinder.min.css' rel='stylesheet'>
+    <link href='css/elfinder.theme.css' rel='stylesheet'>
+    <link href='css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='css/uploadify.css' rel='stylesheet'>
+    <link href='css/animate.min.css' rel='stylesheet'>
+
+    <!-- jQuery -->
+    <script src="bower_components/jquery/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <!-- Début de la topbar -->
+    <div class="navbar navbar-default" role="navigation">
+
+        <div class="navbar-inner">
+            <button type="button" class="navbar-toggle pull-left animated flip">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">
+                <span>Webmath</span></a>
+
+            <!-- Début du menu déroulant du compte -->
+            <div class="btn-group pull-right">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> Compte</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="#">Profil</a></li>
+                    <li class="divider"></li>
+                    <li><a href="login.html">Déconnexion</a></li>
+                </ul>
+            </div>
+            <!-- Fin du menu déroulant -->
+            <!-- Boutons redirigeants -->
+
+            <ul class="collapse navbar-collapse nav navbar-nav top-menu">
+               <li><a href="/accueil.html">Accueil</a></li>
+               <li><a href="/cours.html">Cours</a></li>
+               <li><a href="/exercices.html">Exercices</a></li>
+               <li><a href="/quiz.html">Quiz</a></li>
+            </ul>
+
+        </div>
+    </div>
+    <!-- Fin de la topbar -->
+<div class="ch-container">
+    <div class="row">
+        
+        <!-- Début du menu de gauche -->
+        <div class="col-sm-2 col-lg-2">
+            <div class="sidebar-nav">
+                <div class="nav-canvas">
+                    <div class="nav-sm nav nav-stacked">
+
+                    </div>
+                    <ul class="nav nav-pills nav-stacked main-menu">
+                        <li class="nav-header">Menu</li>
+                        <li><a class="ajax-link" href="index.html"><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
+                        </li>
+                        <li><a class="ajax-link" href="exercises.html"><i class="glyphicon glyphicon-eye-open"></i><span> Exercices</span></a>
+                        </li>
+                        <li class="nav-header hidden-md">Classes</li>
+                        <li><a class="ajax-link" href="classe.html"><span> 1ECG3</span></a></li>
+                        <li><a class="ajax-link" href="classe.html"><span> 2EC3</span></a></li>
+                        <li><a class="ajax-link" href="classe.html"><span> 1ECG1</span></a>
+                        </li>
+                        <li><a class="ajax-link" href="newclass.html"><i class="glyphicon glyphicon-plus"></i><span> Nouvelle classe</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Fin du menu de gauche -->
+
+        <noscript>
+            <div class="alert alert-block col-md-12">
+                <h4 class="alert-heading">Attention!</h4>
+
+                <p>Vous avez besoin de <a href="http://fr.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+                    activé sur ce site.</p>
+            </div>
+        </noscript>
+        <div id="content" class="col-lg-10 col-sm-10">
+            <!-- Début du contenu -->
+                <div>
+    </div>
+    <h1>Créer une classe</h1>
+    <div class="box-content">
+    <div class="input-group-class-name">
+        <input type="name" class="form-control" placeholder="Nom de la classe">
+    </div>
+    <div class="input-group-student">
+        <input type="name" class="form-control" placeholder="Elèves">
+        <a class="ajax-link"><i class="glyphicon glyphicon-plus"></i></a>
+    </div>
+    <div class="classcreate">
+        <a class="btn btn-info" href="#">
+                
+                Créer la classe
+        </a>
+    </div>
+    </div>
+    <!-- Fin du contenu -->
+
+<!-- Javascript -->
+
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- Cookie -->
+<script src="js/jquery.cookie.js"></script>
+<!-- Calendrier -->
+<script src='bower_components/moment/min/moment.min.js'></script>
+<script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+<!-- Données -->
+<script src='js/jquery.dataTables.min.js'></script>
+
+<!-- Menu déroulant -->
+<script src="bower_components/chosen/chosen.jquery.min.js"></script>
+<!-- Images -->
+<script src="bower_components/colorbox/jquery.colorbox-min.js"></script>
+<!-- Notifications -->
+<script src="js/jquery.noty.js"></script>
+<!-- Tables responsive -->
+<script src="bower_components/responsive-tables/responsive-tables.js"></script>
+<!-- tour plugin -->
+<script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+<!-- Etoiles ( évaluation ) -->
+<script src="js/jquery.raty.min.js"></script>
+<!-- iOS -->
+<script src="js/jquery.iphone.toggle.js"></script>
+<!-- Zones de textes croissantes -->
+<script src="js/jquery.autogrow-textarea.js"></script>
+<!-- Ajax et navigateur -->
+<script src="js/jquery.history.js"></script>
+<!-- application script for Charisma demo -->
+<script src="js/charisma.js"></script>
+
+
+
+</body>
+</html>
