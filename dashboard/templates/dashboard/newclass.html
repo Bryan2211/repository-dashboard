@@ -123,19 +123,23 @@
     </div>
     <h1>Créer une classe</h1>
     <div class="box-content">
-    <div class="input-group-class-name">
-        <input type="name" class="form-control" placeholder="Nom de la classe">
-    </div>
-    <div class="input-group-student">
-        <input type="name" class="form-control" placeholder="Elèves">
-        <a class="ajax-link"><i class="glyphicon glyphicon-plus"></i></a>
-    </div>
-    <div class="classcreate">
-        <a class="btn btn-info" href="#">
+    
+    
+    <form class="formNewGroup" method="post" action=".">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Créer la classe">
+    </form>
+    <!--<div class="input-group-class-name">-->
+    <!--    <input type="name" class="form-control" placeholder="Nom de la classe">-->
+    <!--</div>-->
+    
+    <!--<div class="classcreate">-->
+    <!--    <a class="btn btn-info" href="#">-->
                 
-                Créer la classe
-        </a>
-    </div>
+    <!--            Créer la classe-->
+    <!--    </a>-->
+    <!--</div>-->
     </div>
     <!-- Fin du contenu -->
 
