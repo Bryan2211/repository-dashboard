@@ -22,7 +22,7 @@ def group(request):
             newTeacher = formTeacher.cleaned_data["newTeacher"]
             Group.teacher.add(newTeacher)
             Group.save()
-    return render_to_response('dashboard/templates/dashboard/class.html')
+    return render_to_response(request, 'dashboard/templates/dashboard/class.html', locals())
 
 def exercises(request):
     return render_to_response('dashboard/templates/dashboard/exercises.html')
@@ -35,9 +35,9 @@ def newgroup(request):
             
             group = Group(name = group_name)
             group.save()
-            group.teacher = Teacher
+            group.teacher.add(Teacher)
             group.save()
-            return HttpResponse("Classe corrrectement créée")
+            return HttpResponse("Classe correctement créée")
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())
     
         
