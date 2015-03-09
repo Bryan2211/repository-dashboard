@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth import authenticate, login, logout
 from dashboard.forms import NewGroupForm
 from django.core.urlresolvers import reverse
-from dashboard.models import *
+from common.models import Group, Teacher
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
@@ -21,8 +21,8 @@ def newgroup(request):
         form = NewGroupForm(request.POST)
         if form.is_valid():
             group_name = form.cleaned_data["group_name"]
-            teacher = user
-            group = Group.objects.create_group(name, teacher)
+            teacher = Teacher
+            group = Group(group_name, teacher)
             group.save()
             return HttpResponse("Classe corrrectement créée")
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())

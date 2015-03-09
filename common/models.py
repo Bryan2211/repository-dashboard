@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 class BaseProfile(models.Model):
     user = models.OneToOneField(User)
-    school = models.CharField(max_length=30)
     avatar = models.ImageField(null=True, blank=True, upload_to="avatars/")
         
     class Meta:
