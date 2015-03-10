@@ -29,5 +29,5 @@ class GroupMembers(models.Model):
     teacher = models.ForeignKey(Teacher)
     student = models.ForeignKey(Student)
     group = models.ForeignKey(Group)
-    added_on = models.DateField()
+    added_on = models.DateField(auto_now=True)
     

@@ -33,10 +33,10 @@ def newgroup(request):
         if form.is_valid():
             group_name = form.cleaned_data["group_name"]
             
-            group = Group(name = group_name)
-            group.save()
-            group.teacher.add(Teacher)
-            group.save()
+            newGroup = Group.objects.create(name = group_name)
+            newGroup.save()
+            teacherToGroup = GroupMembers(teacher = Teacher.user.username, group = newGroup)
+            teacherToGroup.save()
             return HttpResponse("Classe correctement créée")
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())
     
