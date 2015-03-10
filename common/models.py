@@ -24,3 +24,10 @@ class Group(models.Model):
     student = models.ManyToManyField(Student)
     #homework = models.ManyToManyField("Exercise")
     created_on = models.DateTimeField(auto_now=True)
+    
+class GroupMembers(models.Model):
+    teacher = models.ForeignKey(Teacher)
+    student = models.ForeignKey(Student)
+    group = models.ForeignKey(Group)
+    added_on = models.DateField()
+    

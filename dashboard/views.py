@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth import authenticate, login, logout
 from dashboard.forms import NewGroupForm, NewStudentForm, NewTeacherForm
 from django.core.urlresolvers import reverse
-from common.models import Group, Teacher
+from common.models import Group, Teacher, GroupMembers
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
