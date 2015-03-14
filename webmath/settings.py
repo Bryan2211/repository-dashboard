@@ -87,10 +87,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_ROOT = '/webmath2/static/'
+#STATIC_ROOT = '/webmath2/dashboard/static/'
 
 STATICFILES_DIRS = (
-    '/webmath2/static/',
+    '/webmath2/dashboard/static/',
 )
 
 STATIC_URL = '/static/'
