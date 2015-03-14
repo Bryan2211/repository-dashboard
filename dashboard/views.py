@@ -19,10 +19,10 @@ def group(request):
             Group.save()
         formTeacher = NewTeacherForm(request.POST)
         if formTeacher.is_valid:
-            newTeacher = formTeacher.cleaned_data["newTeacher"]
+            newTeacher = formStudent.cleaned_data["newTeacher"]
             Group.teacher.add(newTeacher)
             Group.save()
-    return render_to_response(request, 'dashboard/templates/dashboard/class.html', locals())
+    return render(request, 'dashboard/templates/dashboard/classe.html', locals())
 
 def exercises(request):
     return render_to_response('dashboard/templates/dashboard/exercises.html')
