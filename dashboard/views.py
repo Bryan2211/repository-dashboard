@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from dashboard.forms import NewGroupForm, NewStudentForm, NewTeacherForm
 from django.core.urlresolvers import reverse
@@ -8,9 +8,12 @@ from django.http import HttpResponse
 
 
 def home(request):
-    return render_to_response('dashboard/templates/dashboard/index.html')
+    user = request.user
+    userGroups = get_object_or_404(GroupMembers, teacher = user)
+    return render_to_response('dashboard/templates/dashboard/index.html', locals())
 
-def group(request):
+def group(request, numGroup):
+    #group = get_object_or_404(Group, numGroup)
     if request.method == "POST":
         formStudent = NewStudentForm(request.POST)
         if formStudent.is_valid:

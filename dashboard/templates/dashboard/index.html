@@ -100,7 +100,15 @@
                         <li><a class="ajax-link" href="/dashboard/classe/"><span> 1ECG3</span></a></li>
                         <li><a class="ajax-link" href="/dashboard/classe/"><span> 2EC3</span></a></li>
                         <li><a class="ajax-link" href="/dashboard/classe/"><span> 1ECG1</span></a>
+                        
+                        {% for group in user.group %}
+                        
+                        <li><a class="ajax-link" href="#"><span>{{ group.name }}</span></a></li>
+                        
+                        {% endfor %}
+                        
                         </li>
+                        
                         <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouvelle classe</span></a></li>
                     </ul>
                 </div>
@@ -120,7 +128,7 @@
             <!-- Début du contenu -->
             <div>
 </div>
-<h1>Bonjour, {{ request.user.username }}</h1>
+<h1>Dashboard de {{ user.username }}</h1>
 <div>
     <div class="box col-md-4">
         <div class="box-inner">
