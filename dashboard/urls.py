@@ -9,6 +9,7 @@ urlpatterns = patterns('teachers.views',
     url(r'^login/$', login, name='login'),
     url(r'^exercices/$', exercises, name='exercises'),
     url(r'^nouveau_groupe/$', newgroup, name='newgroup'),
+    url(r'^manage/exercice/$', manage, name="manage"),
     #url(r'^register/$', register, name='register'),
     #url(r'^admin/', include(admin.site.urls)),
 )

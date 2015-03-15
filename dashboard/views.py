@@ -9,7 +9,6 @@ from django.http import HttpResponse
 
 def home(request):
     user = request.user
-    userGroups = get_object_or_404(GroupMembers, teacher = user)
     return render_to_response('dashboard/templates/dashboard/index.html', locals())
 
 def group(request, numGroup):
@@ -42,5 +41,8 @@ def newgroup(request):
             teacherToGroup.save()
             return HttpResponse("Classe correctement créée")
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())
+    
+def manage(request):
+    return render(request, "dashboard/templates/dashboard/manage.html", locals())
     
         
