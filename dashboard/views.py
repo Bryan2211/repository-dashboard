@@ -35,7 +35,7 @@ def newgroup(request):
             
             newGroup = Group.objects.create(name = group_name)
             newGroup.save()
-            teacherToGroup = GroupMembers(teacher = Teacher.user.username, group = newGroup)
+            teacherToGroup = GroupMembers(teacher = request.user, group = newGroup)
             teacherToGroup.save()
             return HttpResponse("Classe correctement créée")
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())

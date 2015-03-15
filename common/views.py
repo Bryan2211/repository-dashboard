@@ -16,6 +16,7 @@ def connexion(request):
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
+                return redirect("/dashboard/home/")
             else:
                 erreur = True
     else:

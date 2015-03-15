@@ -18,7 +18,7 @@
     
     {% if user.is_authenticated %}
     Connexion réussie! Bienvenue {{ user.username }}!
-    <form method="post" action="{% url 'common:deconnexion' %}">
+    <form method="post" action="{% url 'common:connexion' %}">
         {% csrf_token %}
         <button type="submit" />Se déconnecter</button>
     </form>
