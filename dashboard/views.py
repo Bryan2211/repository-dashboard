@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from dashboard.forms import NewGroupForm, NewStudentForm, NewTeacherForm
+from dashboard.forms import NewGroupForm, NewStudentForm, NewTeacherForm, AddHomeworkForm, SelectGroupForm
 from django.core.urlresolvers import reverse
 from common.models import Group, Teacher, GroupMembers
 from django.contrib.auth.models import User
@@ -43,6 +43,7 @@ def newgroup(request):
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())
     
 def manage(request):
+    
     return render(request, "dashboard/templates/dashboard/manage.html", locals())
     
         

@@ -14,3 +14,6 @@ class NewTeacherForm(forms.Form):
 class AddHomeworkForm(forms.Form):
     name = forms.CharField(label="Nom de l'exercice", max_length=30)
     
+class SelectGroupForm(forms.Form):
+    group_name = forms.CharField(label='Nom de la classe', max_length = 30)
+    
