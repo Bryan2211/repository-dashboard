@@ -97,10 +97,10 @@
                         <li><a class="ajax-link" href="/dashboard/exercices/"><i class="glyphicon glyphicon-eye-open"></i><span> Exercices</span></a>
                         </li>
                         <li class="nav-header hidden-md">Classes</li>
-                        <li><a class="ajax-link" href="/dashboard/classe/"><span> 1ECG3</span></a></li>
-                        <li><a class="ajax-link" href="/dashboard/classe/"><span> 2EC3</span></a></li>
-                        <li><a class="ajax-link" href="/dashboard/classe/"><span> 1ECG1</span></a>
-                        </li>
+                        <li class="nav-header hidden-md">Classes</li>
+                        {% for group in user.group_set.all %}
+                        <li><a class="ajax-link" href="/dashboard/classe/"><span> {{ group.name }}</span></a></li>
+                        {% endfor %}
                         <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouvelle classe</span></a></li>
                     </ul>
                 </div>

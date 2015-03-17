@@ -20,14 +20,14 @@ class Student(BaseProfile):
 
 class Group(models.Model):
     name = models.CharField(max_length=30)
-    teacher = models.ManyToManyField(Teacher)
-    student = models.ManyToManyField(Student)
+    teacher = models.ManyToManyField(Teacher, through='GroupMembers')
+    student = models.ManyToManyField(Student, through = 'GroupMembers')
     #homework = models.ManyToManyField("Exercise")
     created_on = models.DateTimeField(auto_now=True)
     
 class GroupMembers(models.Model):
     teacher = models.ForeignKey(Teacher)
-    student = models.ForeignKey(Student)
+    student = models.ForeignKey(Student, null = True)
     group = models.ForeignKey(Group)
     added_on = models.DateField(auto_now=True)
     

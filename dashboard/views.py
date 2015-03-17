@@ -30,6 +30,7 @@ def exercises(request):
     return render_to_response('dashboard/templates/dashboard/exercises.html')
     
 def newgroup(request):
+    user = Teacher.objects.get(id = request.user.id)
     if request.method == "POST":
         form = NewGroupForm(request.POST)
         if form.is_valid():
@@ -37,7 +38,7 @@ def newgroup(request):
             
             newGroup = Group.objects.create(name = group_name)
             newGroup.save()
-            teacherToGroup = GroupMembers(teacher = request.user, group = newGroup)
+            teacherToGroup = GroupMembers(teacher = user, group = newGroup)
             teacherToGroup.save()
             return HttpResponse("Classe correctement créée")
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())
