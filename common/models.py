@@ -21,7 +21,9 @@ class Student(BaseProfile):
 class Group(models.Model):
     name = models.CharField(max_length=30)
     teacher = models.ManyToManyField(Teacher, through='GroupMembers')
+    teacher2 = models.ManyToManyField(Teacher, related_name = 'name')
     student = models.ManyToManyField(Student, through = 'GroupMembers')
+    student2 = models.ManyToManyField(Student, related_name = 'name')
     #homework = models.ManyToManyField("Exercise")
     created_on = models.DateTimeField(auto_now=True)
     
