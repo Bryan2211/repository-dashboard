@@ -18,6 +18,7 @@ class SelectGroupForm(forms.Form):
     group_name = forms.CharField(label='Nom de la classe', max_length = 30)
     
 class NewPasswordForm(forms.Form):
-    password = forms.CharField(label='Mot de passe', widget=forms.PasswordInput(attrs={'class' : 'form-control'}))
-    passwordConfirm = forms.CharField(label='Confirmez le mot de passe', widget=forms.PasswordInput(attrs={'class' : 'form-control'}))
+    currentPassword = forms.CharField(label='Mot de passe actuelle', widget=forms.PasswordInput(attrs={'class' : 'form-control'}))
+    password = forms.CharField(label='Nouveau mot de passe', widget=forms.PasswordInput(attrs={'class' : 'form-control'}))
+    passwordConfirm = forms.CharField(label='Confirmation du nouveau mot de passe', widget=forms.PasswordInput(attrs={'class' : 'form-control'}))
     

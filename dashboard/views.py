@@ -58,9 +58,10 @@ def profil(request):
     if request.method == "POST":
         form = NewPasswordForm(request.POST)
         if form.is_valid():
+            currentPassword = form.cleaned_data["currentPassword"]
             password = form.cleaned_data["password"]
             passwordConfirm = form.cleaned_data["passwordConfirm"]
-            if password != passwordConfirm:
+            if password != passwordConfirm or currentPassword != request.user.password:
                 success = False
             else:
                 success = True
