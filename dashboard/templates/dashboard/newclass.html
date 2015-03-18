@@ -19,14 +19,13 @@
     <title>Webmath</title>
 
     <!-- Styles -->
-    <link type = "test/css" id="bs-css" href="{% static 'dashboard/css/bootstrap-cerulean.min.css' %}" rel="stylesheet">
+    <link type = "test/css" href="{% static 'dashboard/css/bootstrap-cerulean.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/charisma-app.css' %}"/>
-    <link type="text/css" href="{% static 'dashboard/css/fullcalendar.css'%}" rel='stylesheet'/>
-    <link type="text/css" href="{% static 'dashboard/css/fullcalendar.print.css'%}" rel='stylesheet' media='print'>
-    <link type="text/css" href="{% static 'dashboard/css/chosen.min.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/colorbox.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/responsive-tables.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/bootstrap-tour.min.css'%}" rel='stylesheet'>
+    <link type="text/css" href="{% static 'dashboard/bower_components/fullcalendar/dist/fullcalendar.css'%}" rel='stylesheet'/>
+    <link type="text/css" href="{% static 'dashboard/bower_components/fullcalendar/dist/fullcalendar.print.css'%}" rel='stylesheet' media='print'>
+    <link type="text/css" href="{% static 'dashboard/bower_components/chosen/chosen.min.css'%}" rel='stylesheet'>
+    <link type="text/css" href="{% static 'dashboard/bower_components/responsive-tables/responsive-tables.css'%}" rel='stylesheet'>
+    <link type="text/css" href="{% static 'dashboard/bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css'%}" rel='stylesheet'>
     <link type="text/css" href="{% static 'dashboard/css/jquery.noty.css'%}" rel='stylesheet'>
     <link type="text/css" href="{% static 'dashboard/css/noty_theme_default.css'%}" rel='stylesheet'>
     <link type="text/css" href="{% static 'dashboard/css/elfinder.min.css'%}" rel='stylesheet'>
@@ -36,7 +35,7 @@
     <link type="text/css" href="{% static 'dashboard/css/animate.min.css'%}" rel='stylesheet'>
 
     <!-- jQuery -->
-    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="{% static 'dashboard/bower_components/jquery/jquery.min.js' %}"></script>
 
 </head>
 
@@ -57,7 +56,7 @@
             <!-- Début du menu déroulant du compte -->
             <div class="btn-group pull-right">
                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> Compte</span>
+                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> {{ request.user.username }}</span>
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
@@ -133,16 +132,6 @@
     {% if success %}
     <h2>Classe correctement créée!</h2>
     {% endif %}
-    <!--<div class="input-group-class-name">-->
-    <!--    <input type="name" class="form-control" placeholder="Nom de la classe">-->
-    <!--</div>-->
-    
-    <!--<div class="classcreate">-->
-    <!--    <a class="btn btn-info" href="#">-->
-                
-    <!--            Créer la classe-->
-    <!--    </a>-->
-    <!--</div>-->
     </div>
     <!-- Fin du contenu -->
 
