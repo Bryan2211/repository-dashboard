@@ -27,6 +27,10 @@ def group(request, numGroup):
             newTeacher = formStudent.cleaned_data["newTeacher"]
             Group.teacher.add(newTeacher)
             Group.save()
+    else:
+        formStudent = NewStudentForm()
+        formTeacher = NewTeacherForm()
+        formHomework = AddHomeworkForm()
     return render(request, 'dashboard/templates/dashboard/classe.html', locals())
 
 def exercises(request):
@@ -46,6 +50,8 @@ def newgroup(request):
             teacherToGroup = GroupMembers(teacher = user, group = newGroup)
             teacherToGroup.save()
             success = True
+    else:
+        form = NewGroupForm()
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())
     
 def manage(request):
@@ -68,7 +74,8 @@ def profil(request):
                 u = request.user
                 u.set_password(password)
                 u.save()
-                
+    else:
+        form = NewPasswordForm()
     return render(request, 'dashboard/templates/dashboard/profile.html', locals())
     
         
