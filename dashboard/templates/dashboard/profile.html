@@ -96,97 +96,37 @@
                         <li><a class="ajax-link" href="/dashboard/exercices/"><i class="glyphicon glyphicon-eye-open"></i><span> Exercices</span></a>
                         </li>
                         <li class="nav-header hidden-md">Classes</li>
-                        
                         {% for group in user.group_set.all %}
                         <li><a class="ajax-link" href="/dashboard/classe/"><span> {{ group.name }}</span></a></li>
                         {% endfor %}
-                        
                         <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouvelle classe</span></a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <!-- Fin du menu de gauche -->
+<!-- Début du contenu -->
+<noscript>
+    <div class="alert alert-block col-md-12">
+        <h4 class="alert-heading">Attention!</h4>
 
-        <noscript>
-            <div class="alert alert-block col-md-12">
-                <h4 class="alert-heading">Attention!</h4>
+        <p>Vous avez besoin de <a href="http://fr.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+        activé sur ce site.</p>
+    </div>
+</noscript>
 
-                <p>Vous avez besoin de <a href="http://fr.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
-                    activé sur ce site.</p>
-            </div>
-        </noscript>
-        <div id="content" class="col-lg-10 col-sm-10">
+<div id="content" class="col-lg-10 col-sm-10">
             <!-- Début du contenu -->
-            <div>
-</div>
-
-{% if firstLetter in voyelle %}
-
-<h1>Dashboard d'{{ request.user.username }}</h1>
-
-{% else %}
-
-<h1>Dashboard de {{ request.user.username }}</h1>
-
-{% endif %}
-
-<div>
-    <div class="box col-md-4">
-        <div class="box-inner">
-            <div class="box-header well" data-original-title="">
-                <h2><i class="glyphicon glyphicon-list"></i> Statistiques hebdomadaires</h2>
-            </div>
-            <div class="box-content">
-                <ul class="dashboard-list">
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-arrow-up"></i>
-                            <span class="green">92</span>
-                            Exercices réalisés
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-arrow-down"></i>
-                            <span class="red">67</span>
-                            Exercices réussis
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-minus"></i>
-                            <span class="blue">25</span>
-                            Exercices faux
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-comment"></i>
-                            <span class="yellow">12</span>
-                            Commentaires
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <div>
+    </div>
+    <h1>Changer de mot de passe</h1>
+    <div class="box-content">
+        <form class="formNewPassword" method="post" action=".">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-info" type="submit" value="Changer de mot de passe">
+        </form>
     </div>
 </div>
-<div>
-    <div class="box col-md-4">
-        <div class="box-inner">
-            <div class="box-header well" data-original-title="">
-                <h2><i class="glyphicon glyphicon-list"></i> Classe de la semaine</h2>
-            </div>
-            <div class="box-content">
-                <h2><a class="ajax-link" href="classe.html">1ECG3</a></h2>
-                <p>86% de réussite aux exercices</p>
-            </div>
-        </div>
-    </div>
-</div>
-    <!-- Fin du contenu -->
-
 <!-- Javascript -->
 
 <script type="text/javascript" src="{% static 'dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>

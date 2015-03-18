@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from dashboard.forms import NewGroupForm, NewStudentForm, NewTeacherForm, AddHomeworkForm, SelectGroupForm
+from dashboard.forms import NewGroupForm, NewStudentForm, NewTeacherForm, AddHomeworkForm, SelectGroupForm, NewPasswordForm
 from django.core.urlresolvers import reverse
 from common.models import Group, Teacher, GroupMembers
 from django.contrib.auth.models import User
@@ -51,5 +51,23 @@ def newgroup(request):
 def manage(request):
     user = Teacher.objects.get(user = request.user)
     return render(request, "dashboard/templates/dashboard/manage.html", locals())
+    
+def profil(request):
+    user = Teacher.objects.get(user = request.user)
+    success = ''
+    if request.methode == "POST":
+        form = NewPasswordForm(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data["password"]
+            passwordConfirm = form.cleaned_data["passwordConfirm"]
+            if password != passwordConfirm:
+                success = False
+            else:
+                success = True
+            u = request.user
+            u.set_password(password)
+            u.save()
+                
+    return render(request, 'dashboard/templates/dashboard/profile.html', locals())
     
         

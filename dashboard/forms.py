@@ -17,3 +17,7 @@ class AddHomeworkForm(forms.Form):
 class SelectGroupForm(forms.Form):
     group_name = forms.CharField(label='Nom de la classe', max_length = 30)
     
+class NewPasswordForm(forms.Form):
+    password = forms.CharField(label='Mot de passe', widget=forms.PasswordInput(attrs={'class' : 'form-control'}))
+    passwordConfirm = forms.CharField(label='Confirmez le mot de passe', widget=forms.PasswordInput(attrs={'class' : 'form-control'}))
+    
