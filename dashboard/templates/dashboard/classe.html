@@ -95,11 +95,11 @@
                         </li>
                         <li><a class="ajax-link" href="/dashboard/exercices/"><i class="glyphicon glyphicon-eye-open"></i><span> Exercices</span></a>
                         </li>
-                        <li class="nav-header hidden-md">Classes</li>
+                        <li class="nav-header hidden-md">Groupes</li>
                         {% for group in user.group_set.all %}
                         <li><a class="ajax-link" href="/dashboard/classe/"><span> {{ group.name }}</span></a></li>
                         {% endfor %}
-                        <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouvelle classe</span></a></li>
+                        <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouveau groupe</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -122,7 +122,7 @@
     <div class="classdelete">
         <a class="btn btn-danger" href="#">
                 <i class="glyphicon glyphicon-trash icon-white"></i>
-                Supprimer la classe
+                Supprimer le groupe
             </a>
     </div>
 

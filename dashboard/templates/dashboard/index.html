@@ -95,13 +95,13 @@
                         </li>
                         <li><a class="ajax-link" href="/dashboard/exercices/"><i class="glyphicon glyphicon-eye-open"></i><span> Exercices</span></a>
                         </li>
-                        <li class="nav-header hidden-md">Classes</li>
+                        <li class="nav-header hidden-md">Groupes</li>
                         
                         {% for group in user.group_set.all %}
                         <li><a class="ajax-link" href="/dashboard/classe/"><span> {{ group.name }}</span></a></li>
                         {% endfor %}
                         
-                        <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouvelle classe</span></a></li>
+                        <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouveau groupe</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -176,7 +176,7 @@
     <div class="box col-md-4">
         <div class="box-inner">
             <div class="box-header well" data-original-title="">
-                <h2><i class="glyphicon glyphicon-list"></i> Classe de la semaine</h2>
+                <h2><i class="glyphicon glyphicon-list"></i> Groupe de la semaine</h2>
             </div>
             <div class="box-content">
                 <h2><a class="ajax-link" href="classe.html">1ECG3</a></h2>
