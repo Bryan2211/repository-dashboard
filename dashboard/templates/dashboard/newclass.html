@@ -129,6 +129,10 @@
         {{ form.as_p }}
         <input class="btn btn-info" type="submit" value="Créer la classe">
     </form>
+    
+    {% if success %}
+    <h2>Classe correctement créée!</h2>
+    {% endif %}
     <!--<div class="input-group-class-name">-->
     <!--    <input type="name" class="form-control" placeholder="Nom de la classe">-->
     <!--</div>-->

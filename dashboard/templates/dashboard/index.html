@@ -121,7 +121,17 @@
             <!-- Début du contenu -->
             <div>
 </div>
+
+{% if firstLetter in voyelle %}
+
+<h1>Dashboard d'{{ request.user.username }}</h1>
+
+{% else %}
+
 <h1>Dashboard de {{ request.user.username }}</h1>
+
+{% endif %}
+
 <div>
     <div class="box col-md-4">
         <div class="box-inner">

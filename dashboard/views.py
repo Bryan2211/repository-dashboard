@@ -8,7 +8,9 @@ from django.http import HttpResponse
 
 
 def home(request):
+    voyelle = 'aeiouyàäâéèëêîïíìôöõòûüùúAEIOUY'
     user = Teacher.objects.get(user = request.user)
+    firstLetter = request.user.username[0]
     return render(request, 'dashboard/templates/dashboard/index.html', locals())
 
 def group(request, numGroup):
@@ -32,6 +34,7 @@ def exercises(request):
     return render(request, 'dashboard/templates/dashboard/exercises.html', locals())
     
 def newgroup(request):
+    success = False
     user = Teacher.objects.get(user = request.user)
     if request.method == "POST":
         form = NewGroupForm(request.POST)
@@ -42,7 +45,7 @@ def newgroup(request):
             newGroup.save()
             teacherToGroup = GroupMembers(teacher = user, group = newGroup)
             teacherToGroup.save()
-            return HttpResponse("Classe correctement créée")
+            success = True
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())
     
 def manage(request):
