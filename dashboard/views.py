@@ -1,16 +1,18 @@
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from dashboard.forms import NewGroupForm, NewStudentForm, NewTeacherForm
+from dashboard.forms import NewGroupForm, NewStudentForm, NewTeacherForm, AddHomeworkForm, SelectGroupForm
 from django.core.urlresolvers import reverse
-from common.models import Group, Teacher
+from common.models import Group, Teacher, GroupMembers
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
 
 def home(request):
-    return render_to_response('dashboard/templates/dashboard/index.html')
+    user = request.user
+    return render_to_response('dashboard/templates/dashboard/index.html', locals())
 
-def group(request):
+def group(request, numGroup):
+    #group = get_object_or_404(Group, numGroup)
     if request.method == "POST":
         formStudent = NewStudentForm(request.POST)
         if formStudent.is_valid:
@@ -19,10 +21,10 @@ def group(request):
             Group.save()
         formTeacher = NewTeacherForm(request.POST)
         if formTeacher.is_valid:
-            newTeacher = formTeacher.cleaned_data["newTeacher"]
+            newTeacher = formStudent.cleaned_data["newTeacher"]
             Group.teacher.add(newTeacher)
             Group.save()
-    return render_to_response(request, 'dashboard/templates/dashboard/class.html', locals())
+    return render(request, 'dashboard/templates/dashboard/classe.html', locals())
 
 def exercises(request):
     return render_to_response('dashboard/templates/dashboard/exercises.html')
@@ -33,11 +35,15 @@ def newgroup(request):
         if form.is_valid():
             group_name = form.cleaned_data["group_name"]
             
-            group = Group(name = group_name)
-            group.save()
-            group.teacher.add(Teacher)
-            group.save()
+            newGroup = Group.objects.create(name = group_name)
+            newGroup.save()
+            teacherToGroup = GroupMembers(teacher = request.user, group = newGroup)
+            teacherToGroup.save()
             return HttpResponse("Classe correctement créée")
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())
+    
+def manage(request):
+    
+    return render(request, "dashboard/templates/dashboard/manage.html", locals())
     
         
