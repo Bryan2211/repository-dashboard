@@ -8,10 +8,11 @@ from django.http import HttpResponse
 
 
 def home(request):
-    user = request.user
-    return render_to_response('dashboard/templates/dashboard/index.html', locals())
+    user = Teacher.objects.get(id = request.user.id)
+    return render(request, 'dashboard/templates/dashboard/index.html', locals())
 
 def group(request, numGroup):
+    user = Teacher.objects.get(id = request.user.id)
     #group = get_object_or_404(Group, numGroup)
     if request.method == "POST":
         formStudent = NewStudentForm(request.POST)
@@ -27,6 +28,7 @@ def group(request, numGroup):
     return render(request, 'dashboard/templates/dashboard/classe.html', locals())
 
 def exercises(request):
+    user = Teacher.objects.get(id = request.user.id)
     return render_to_response('dashboard/templates/dashboard/exercises.html')
     
 def newgroup(request):
@@ -44,7 +46,7 @@ def newgroup(request):
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())
     
 def manage(request):
-    
+    user = Teacher.objects.get(id = request.user.id)
     return render(request, "dashboard/templates/dashboard/manage.html", locals())
     
         

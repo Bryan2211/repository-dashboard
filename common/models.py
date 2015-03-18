@@ -25,6 +25,9 @@ class Group(models.Model):
     #homework = models.ManyToManyField("Exercise")
     created_on = models.DateTimeField(auto_now=True)
     
+    def __str__(self):
+        return"Classe {0}".format(self.name)
+    
 class GroupMembers(models.Model):
     teacher = models.ForeignKey(Teacher)
     student = models.ForeignKey(Student, null = True)

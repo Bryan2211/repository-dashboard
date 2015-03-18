@@ -98,7 +98,7 @@
                         </li>
                         <li class="nav-header hidden-md">Classes</li>
                         {% for group in user.group_set.all %}
-                        <li><a class="ajax-link" href="/dashboard/classe/"><span> {{ group.name }}</span></a></li>
+                        <li><a class="ajax-link" href="#"><span> {{ group.name }}</span></a></li>
                         {% endfor %}
             
                         <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouvelle classe</span></a></li>

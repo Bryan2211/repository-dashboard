@@ -97,7 +97,6 @@
                         <li><a class="ajax-link" href="/dashboard/exercices/"><i class="glyphicon glyphicon-eye-open"></i><span> Exercices</span></a>
                         </li>
                         <li class="nav-header hidden-md">Classes</li>
-                        <li class="nav-header hidden-md">Classes</li>
                         {% for group in user.group_set.all %}
                         <li><a class="ajax-link" href="/dashboard/classe/"><span> {{ group.name }}</span></a></li>
                         {% endfor %}
@@ -145,11 +144,11 @@
     </thead>
     <tbody>
     
-    {% for student in group %}
+    {% for student in group.student.all %}
     
     <tr>
         <td>{{ student.username }}</td>
-        <td class="center">{{ GroupMembers.added_on }}</td>
+        <td class="center">{{ student.added_on_set }}</td>
         <td class="center">
             <a class="btn btn-success" href="#">
                 <i class="glyphicon glyphicon-zoom-in icon-white"></i>
@@ -193,11 +192,11 @@
     </tr>
     </thead>
     <tbody>
-    {% for teacher in group %}
+    {% for teacher in group.teacher.all %}
     
     <tr>
-        <td>{{ teacher.firstname }} {{ teacher.lastname }}</td>
-        <td class="center">{{ GroupMembers.added_on }}</td>
+        <td>{{teacher.username}}</td>
+        <td class="center">{{ teacher.added_on_set }}</td>
         <td class="center">
             <a class="btn btn-success" href="#">
                 <i class="glyphicon glyphicon-zoom-in icon-white"></i>
