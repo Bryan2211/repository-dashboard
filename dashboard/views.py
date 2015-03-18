@@ -55,7 +55,7 @@ def manage(request):
 def profil(request):
     user = Teacher.objects.get(user = request.user)
     success = ''
-    if request.methode == "POST":
+    if request.method == "POST":
         form = NewPasswordForm(request.POST)
         if form.is_valid():
             password = form.cleaned_data["password"]
@@ -64,9 +64,9 @@ def profil(request):
                 success = False
             else:
                 success = True
-            u = request.user
-            u.set_password(password)
-            u.save()
+                u = request.user
+                u.set_password(password)
+                u.save()
                 
     return render(request, 'dashboard/templates/dashboard/profile.html', locals())
     
