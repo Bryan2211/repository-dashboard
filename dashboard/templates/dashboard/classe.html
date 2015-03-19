@@ -97,7 +97,7 @@
                         </li>
                         <li class="nav-header hidden-md">Groupes</li>
                         {% for group in user.group_set.all %}
-                        <li><a class="ajax-link" href={% url 'group_view' group.id %}><span> {{ group.name }}</span></a></li>
+                        <li><a class="ajax-link" href="{% url 'group_view' group.id %}"><span> {{ group.name }}</span></a></li>
                         {% endfor %}
                         <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouveau groupe</span></a></li>
                     </ul>
@@ -165,7 +165,7 @@
     <form class="formStudent" method="post" action=".">
         {% csrf_token %}
         {{ formStudent.as_p }}
-        <input class="btn btn-info" type="submit" value="Ajouter l'élève">
+        <input class="btn btn-info" type="submit" name="addStudent" value="Ajouter l'élève">
     </form>
     
     </tbody>
@@ -214,7 +214,7 @@
      <form class="formTeacher" method="post" action=".">
         {% csrf_token %}
         {{ formTeacher.as_p }}
-        <input class="btn btn-info" type="submit" value="Ajouter le professeur">
+        <input class="btn btn-info" type="submit" name="addTeacher" value="Ajouter le professeur">
     </form>
     
     </tbody>

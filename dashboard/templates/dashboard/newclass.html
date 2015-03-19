@@ -97,7 +97,7 @@
                         </li>
                         <li class="nav-header hidden-md">Groupes</li>
                         {% for group in user.group_set.all %}
-                        <li><a class="ajax-link" href={% url 'group_view' group.id %}><span> {{ group.name }}</span></a></li>
+                        <li><a class="ajax-link" href="{% url 'group_view' group.id %}"><span> {{ group.name }}</span></a></li>
                         {% endfor %}
             
                         <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouveau groupe</span></a></li>

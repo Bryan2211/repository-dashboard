@@ -13,36 +13,6 @@ def home(request):
     firstLetter = request.user.username[0]
     return render(request, 'dashboard/templates/dashboard/index.html', locals())
 
-def group(request, group_id):
-    user = Teacher.objects.get(user = request.user)
-    group = Group.objects.get(id = group_id)
-    studentList = group.student.all()
-    teacherList = group.teacher.all()
-
-    #group = get_object_or_404(Group, numGroup)
-    if request.method == "POST":
-        formStudent = NewStudentForm(request.POST)
-        if formStudent.is_valid():
-            newStudent = formStudent.cleaned_data["nickname"]
-            studentUser = User.objects.get(username = newStudent)
-            student = Student.objects.get(user = studentUser)
-            newStudentToGroup = GroupMembers(student = student, group = group)
-            newStudentToGroup.save()
-            
-    if request.method == "POST":
-        formTeacher = NewTeacherForm(request.POST)
-        if formTeacher.is_valid():
-            newTeacher = formTeacher.cleaned_data["nickname"]
-            teacherUser = User.objects.get(username = newTeacher)
-            teacher = Teacher.objects.get(user = teacherUser)
-            newTeacherToGroup = GroupMembers(teacher = teacher, group = group)
-            newTeacherToGroup.save()
-    else:
-        formStudent = NewStudentForm()
-        formTeacher = NewTeacherForm()
-        formHomework = AddHomeworkForm()
-    return render(request, 'dashboard/templates/dashboard/classe.html', locals())
-
 def exercises(request):
     user = Teacher.objects.get(user = request.user)
     return render(request, 'dashboard/templates/dashboard/exercises.html', locals())
@@ -87,5 +57,54 @@ def profil(request):
     else:
         form = NewPasswordForm()
     return render(request, 'dashboard/templates/dashboard/profile.html', locals())
+    
+def group(request, group_id):
+    user = Teacher.objects.get(user = request.user)
+    group = Group.objects.get(id = group_id)
+    studentList = group.student.all()
+    teacherList = group.teacher.all()
+    
+    if request.method == "POST":
+        if 'addTeacher' in request.POST:
+            formTeacher = NewTeacherForm(request.POST)
+            if formTeacher.is_valid():
+                newTeacher = formTeacher.cleaned_data["nickname"]
+                teacherUser = User.objects.get(username = newTeacher)
+                teacher = Teacher.objects.get(user = teacherUser)
+                newTeacherToGroup = GroupMembers(teacher = teacher, group = group)
+                newTeacherToGroup.save()
+        elif 'addStudent' in request.POST:
+            formStudent = NewStudentForm(request.POST)
+            if formStudent.is_valid():
+                newStudent = formStudent.cleaned_data["nickname"]
+                studentUser = User.objects.get(username = newStudent)
+                student = Student.objects.get(user = studentUser)
+                newStudentToGroup = GroupMembers(student = student, group = group)
+                newStudentToGroup.save()
+    else:
+        formStudent = NewStudentForm()
+        formTeacher = NewTeacherForm()
+        formHomework = AddHomeworkForm()
+    return render(request, 'dashboard/templates/dashboard/classe.html', locals())
+    
+def addTeacher(request):
+    if request.method == "POST":
+        formTeacher = NewTeacherForm(request.POST)
+        if formTeacher.is_valid():
+            newTeacher = formTeacher.cleaned_data["nickname"]
+            teacherUser = User.objects.get(username = newTeacher)
+            teacher = Teacher.objects.get(user = teacherUser)
+            newTeacherToGroup = GroupMembers(teacher = teacher, group = group)
+            newTeacherToGroup.save()
+            
+def addStudent(request):
+    if request.method == "POST":
+        formStudent = NewStudentForm(request.POST)
+        if formStudent.is_valid():
+            newStudent = formStudent.cleaned_data["nickname"]
+            studentUser = User.objects.get(username = newStudent)
+            student = Student.objects.get(user = studentUser)
+            newStudentToGroup = GroupMembers(student = student, group = group)
+            newStudentToGroup.save()
     
         
