@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, render_to_response, get_object_or
 from django.contrib.auth import authenticate, login, logout
 from dashboard.forms import NewGroupForm, NewStudentForm, NewTeacherForm, AddHomeworkForm, SelectGroupForm, NewPasswordForm
 from django.core.urlresolvers import reverse
-from common.models import Group, Teacher, GroupMembers
+from common.models import Group, Teacher, GroupMembers, Student
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
@@ -13,20 +13,30 @@ def home(request):
     firstLetter = request.user.username[0]
     return render(request, 'dashboard/templates/dashboard/index.html', locals())
 
-def group(request, numGroup):
+def group(request, group_id):
     user = Teacher.objects.get(user = request.user)
+    group = Group.objects.get(id = group_id)
+    studentList = group.student.all()
+    teacherList = group.teacher.all()
+
     #group = get_object_or_404(Group, numGroup)
     if request.method == "POST":
         formStudent = NewStudentForm(request.POST)
-        if formStudent.is_valid:
-            newStudent = formStudent.cleaned_data["newStudent"]
-            Group.student.add(newStudent)
-            Group.save()
+        if formStudent.is_valid():
+            newStudent = formStudent.cleaned_data["nickname"]
+            studentUser = User.objects.get(username = newStudent)
+            student = Student.objects.get(user = studentUser)
+            newStudentToGroup = GroupMembers(student = student, group = group)
+            newStudentToGroup.save()
+            
+    if request.method == "POST":
         formTeacher = NewTeacherForm(request.POST)
-        if formTeacher.is_valid:
-            newTeacher = formStudent.cleaned_data["newTeacher"]
-            Group.teacher.add(newTeacher)
-            Group.save()
+        if formTeacher.is_valid():
+            newTeacher = formTeacher.cleaned_data["nickname"]
+            teacherUser = User.objects.get(username = newTeacher)
+            teacher = Teacher.objects.get(user = teacherUser)
+            newTeacherToGroup = GroupMembers(teacher = teacher, group = group)
+            newTeacherToGroup.save()
     else:
         formStudent = NewStudentForm()
         formTeacher = NewTeacherForm()

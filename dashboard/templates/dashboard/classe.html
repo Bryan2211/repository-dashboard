@@ -143,11 +143,11 @@
     </thead>
     <tbody>
     
-    {% for student in group.student.all %}
-    
+    {% for student in studentList %}
+
     <tr>
-        <td>{{ student.username }}</td>
-        <td class="center">{{ student.added_on_set }}</td>
+        <td>{{ student.user.username }}</td>
+        <td class="center">{{ dateStudent.added_on }}</td>
         <td class="center">
             <a class="btn btn-success" href="#">
                 <i class="glyphicon glyphicon-zoom-in icon-white"></i>
@@ -191,11 +191,11 @@
     </tr>
     </thead>
     <tbody>
-    {% for teacher in group.teacher.all %}
+    {% for teacher in teacherList %}
     
     <tr>
-        <td>{{teacher.username}}</td>
-        <td class="center">{{ teacher.added_on_set }}</td>
+        <td>{{teacher.user.username}}</td>
+        <td class="center">{{ dateTeacher.added_on }}</td>
         <td class="center">
             <a class="btn btn-success" href="#">
                 <i class="glyphicon glyphicon-zoom-in icon-white"></i>
@@ -254,9 +254,11 @@
                 71%
             </td>
         </tr>
-        <a class="btn btn-info" href="#">
-            Assigner un devoir
-        </a>
+        <form class="formHomework" method="post" action=".">
+            {% csrf_token %}
+            {{ formHomework.as_p }}
+        <input class="btn btn-info" type="submit" value="Assigner le devoir">
+    </form>
     </tbody>
     </table>
     </div>

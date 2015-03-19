@@ -29,10 +29,10 @@ class Group(models.Model):
         return"Classe {0}".format(self.name)
     
 class GroupMembers(models.Model):
-    teacher = models.ForeignKey(Teacher)
+    teacher = models.ForeignKey(Teacher, null = True)
     student = models.ForeignKey(Student, null = True)
     group = models.ForeignKey(Group)
-    added_on = models.DateField(auto_now=True)
+    added_on = models.DateTimeField(auto_now=True)
     
 #
 # Modèle de Keran pour les cours
