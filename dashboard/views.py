@@ -66,6 +66,7 @@ def group(request, group_id):
     homeworkExList = group.homeworkExercise.all()
     homeworkQuList = group.homeworkQuiz.all()
     homeworkCoList = group.homeworkCourse.all()
+    deleteConfirmation = False
     
     if request.method == "POST":
         if 'addTeacher' in request.POST:
@@ -130,6 +131,13 @@ def group(request, group_id):
                         newHomework.save()
                     except Course.DoesNotExist:
                         erreur = True
+        elif 'deleteClass' in request.POST:
+            deleteConfirmation = True
+        
+        elif 'deleteClassConfirm' in request.POST:
+            group = Group.objects.get(id = group_id)
+            group.delete()
+            return redirect('home')
                     
     else:
         formStudent = NewStudentForm()

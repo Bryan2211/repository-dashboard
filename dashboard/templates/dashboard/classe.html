@@ -120,10 +120,21 @@
     </div>
     
     <div class="classdelete">
-        <a class="btn btn-danger" href="#">
-                <i class="glyphicon glyphicon-trash icon-white"></i>
-                Supprimer le groupe
-            </a>
+        {% if deleteConfirmation == False %}
+        <form class="deleteClass" method="post" action=".">
+        {% csrf_token %}
+        <input class="btn btn-danger" type="submit" name="deleteClass" value="Supprimer la classe">
+        </form>
+        {% endif %}
+        
+        {% if deleteConfirmation %}
+            <p>Rappuyez sur le bouton pour confirmer la suppression de la classe.</p>
+            <form class="deleteClass" method="post" action=".">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" name="deleteClassConfirm" value="Supprimer la classe">
+            </form>
+        {% endif %}
+        
     </div>
 
     <div class="row">
