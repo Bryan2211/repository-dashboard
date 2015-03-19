@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, render_to_response, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from dashboard.forms import NewGroupForm, NewStudentForm, NewTeacherForm, AddHomeworkForm, SelectGroupForm, NewPasswordForm
 from django.core.urlresolvers import reverse
@@ -138,6 +138,11 @@ def group(request, group_id):
             group = Group.objects.get(id = group_id)
             group.delete()
             return redirect('home')
+            
+        
+        formStudent = NewStudentForm()
+        formTeacher = NewTeacherForm()
+        formHomework = AddHomeworkForm()
                     
     else:
         formStudent = NewStudentForm()
@@ -146,8 +151,6 @@ def group(request, group_id):
     return render(request, 'dashboard/templates/dashboard/classe.html', locals())
         
 def deleteFromGroup(request, member_id, group_id):
-    successTeacher = False
-    successStudent = False
     if request.method == "POST":
         if 'deleteStudent' in request.POST:
         
@@ -156,16 +159,13 @@ def deleteFromGroup(request, member_id, group_id):
             studentToGroup = GroupMembers.objects.get(student = student, group = group)
             studentToGroup.delete()
             
-            successStudent = True
-            
+
         elif 'deleteTeacher' in request.POST:
             teacher = Teacher.objects.get(id = member_id)
             group = Group.objects.get(id = group_id)
             teacherToGroup = GroupMembers.objects.get(teacher = teacher, group = group)
             teacherToGroup.delete()
             
-            successTeacher = True
-    
     return redirect('group_view', group_id = group_id)
         
     
