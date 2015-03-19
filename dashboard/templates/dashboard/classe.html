@@ -121,10 +121,10 @@
     
     <div class="classdelete">
         {% if deleteConfirmation == False %}
-        <form class="deleteClass" method="post" action=".">
-        {% csrf_token %}
-        <input class="btn btn-danger" type="submit" name="deleteClass" value="Supprimer la classe">
-        </form>
+            <form class="deleteClass" method="post" action=".">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" name="deleteClass" value="Supprimer la classe">
+            </form>
         {% endif %}
         
         {% if deleteConfirmation %}
@@ -160,14 +160,10 @@
         <td>{{ student.user.username }}</td>
         <td class="center">{{ dateStudent.added_on }}</td>
         <td class="center">
-            <a class="btn btn-success" href="#">
-                <i class="glyphicon glyphicon-zoom-in icon-white"></i>
-                Afficher
-            </a>
-            <a class="btn btn-danger" href="#">
-                <i class="glyphicon glyphicon-trash icon-white"></i>
-                Supprimer
-            </a>
+                <form class="deleteFromGroup" action = "{% url 'deleteFromGroup' group.id student.id %}" method="post" action=".">
+                {% csrf_token %}
+                <input class="btn btn-danger" type="submit" name="deleteStudent" value="Retirer">
+                </form>
         </td>
     </tr>
     
@@ -212,14 +208,10 @@
         <td>{{teacher.user.username}}</td>
         <td class="center">{{ dateTeacher.added_on }}</td>
         <td class="center">
-            <a class="btn btn-success" href="#">
-                <i class="glyphicon glyphicon-zoom-in icon-white"></i>
-                Afficher
-            </a>
-            <a class="btn btn-danger" href="#">
-                <i class="glyphicon glyphicon-trash icon-white"></i>
-                Supprimer
-            </a>
+            <form class="deleteFromGroup" action = "{% url 'deleteFromGroup' group.id teacher.id %}" method="post" action=".">
+                {% csrf_token %}
+                <input class="btn btn-danger" type="submit" name="deleteTeacher" value="Retirer">
+            </form>
         </td>
     </tr>
     

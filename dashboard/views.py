@@ -145,3 +145,27 @@ def group(request, group_id):
         formHomework = AddHomeworkForm()
     return render(request, 'dashboard/templates/dashboard/classe.html', locals())
         
+def deleteFromGroup(request, member_id, group_id):
+    successTeacher = False
+    successStudent = False
+    if request.method == "POST":
+        if 'deleteStudent' in request.POST:
+        
+            student = Student.objects.get(id = member_id)
+            group = Group.objects.get(id = group_id)
+            studentToGroup = GroupMembers.objects.get(student = student, group = group)
+            studentToGroup.delete()
+            
+            successStudent = True
+            
+        elif 'deleteTeacher' in request.POST:
+            teacher = Teacher.objects.get(id = member_id)
+            group = Group.objects.get(id = group_id)
+            teacherToGroup = GroupMembers.objects.get(teacher = teacher, group = group)
+            teacherToGroup.delete()
+            
+            successTeacher = True
+    
+    return redirect('group_view', group_id = group_id)
+        
+    
