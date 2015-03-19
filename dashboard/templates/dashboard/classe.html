@@ -158,7 +158,7 @@
 
     <tr>
         <td>{{ student.user.username }}</td>
-        <td class="center">{{ dateStudent.added_on }}</td>
+        <td class="center">{{ student.groupmembers_set.added_on }}</td>
         <td class="center">
                 <form class="deleteFromGroup" action = "{% url 'deleteFromGroup' group.id student.id %}" method="post" action=".">
                 {% csrf_token %}

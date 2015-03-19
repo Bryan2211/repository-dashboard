@@ -61,11 +61,13 @@ def profil(request):
 def group(request, group_id):
     user = Teacher.objects.get(user = request.user)
     group = Group.objects.get(id = group_id)
+    
     studentList = group.student.all()
     teacherList = group.teacher.all()
     homeworkExList = group.homeworkExercise.all()
     homeworkQuList = group.homeworkQuiz.all()
     homeworkCoList = group.homeworkCourse.all()
+    
     deleteConfirmation = False
     
     if request.method == "POST":
@@ -167,5 +169,18 @@ def deleteFromGroup(request, member_id, group_id):
             teacherToGroup.delete()
             
     return redirect('group_view', group_id = group_id)
+
+def deleteActivity(request, activity_id):
+    if request.method == "POST":
+        if 'deleteExercise' in request.POST:
+            exercise = Exercise.objects.get(id = activity_id)
+            exercise.delete()
+        if 'deleteQuiz' in request.POST:
+            quiz = Quiz.objects.get(id = activity_id)
+            quiz.delete()
+        if 'deleteCourse' in request.POST:
+            course = Course.objects.get(id = activity_id)
+            course.delete()
+    return redirect('exercises')
         
     

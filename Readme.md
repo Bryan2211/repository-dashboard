@@ -2,4 +2,4 @@
 Pour supprimer les doubles points : https://github.com/torchbox/wagtail/issues/130
 
 # Créer des utilisateurs
-Via l'administration -> user:admin password:1234
+Via l'administration -> user:admin password:12345

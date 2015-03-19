@@ -147,10 +147,10 @@
                             <i class="glyphicon glyphicon-eye-open"></i>
                                 Manager
                             </a>
-                            <a class="btn btn-danger" href="#">
-                            <i class="glyphicon glyphicon-trash icon-white"></i>
-                                Supprimer
-                            </a>
+                            <form class="deleteActivity" action = "{% url 'deleteActivity' exercise.id %}" method="post" action=".">
+                                {% csrf_token %}
+                                <input class="btn btn-danger" type="submit" name="deleteExercise" value="Supprimer">
+                            </form>
                         </td>
                     </tr>
                     
@@ -194,10 +194,10 @@
                             <i class="glyphicon glyphicon-eye-open"></i>
                                 Manager
                             </a>
-                            <a class="btn btn-danger" href="#">
-                            <i class="glyphicon glyphicon-trash icon-white"></i>
-                                Supprimer
-                            </a>
+                            <form class="deleteActivity" action = "{% url 'deleteActivity' quiz.id %}" method="post" action=".">
+                                {% csrf_token %}
+                                <input class="btn btn-danger" type="submit" name="deleteQuiz" value="Supprimer">
+                            </form>
                         </td>
                     </tr>
                     
@@ -244,10 +244,10 @@
                             <i class="glyphicon glyphicon-eye-open"></i>
                                 Manager
                             </a>
-                            <a class="btn btn-danger" href="#">
-                            <i class="glyphicon glyphicon-trash icon-white"></i>
-                                Supprimer
-                            </a>
+                            <form class = "deleteActivity" action = "{% url 'deleteActivity' course.id %}" method="post" action=".">
+                                {% csrf_token %}
+                                <input class="btn btn-danger" type="submit" name="deleteCourse" value="Supprimer">
+                            </form>
                         </td>
                     </tr>
                     

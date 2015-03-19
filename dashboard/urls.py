@@ -11,7 +11,8 @@ urlpatterns = patterns('teachers.views',
     url(r'^nouveau_groupe/$', newgroup, name='newgroup'),
     url(r'^manage/exercice/$', manage, name="manage"),
     url(r'^profil/$', profil, name = 'profil'),
-    url(r'^enlever_groupe/(?P<group_id>\d+)/(?P<member_id>\d+)/$', deleteFromGroup, name = "deleteFromGroup")
+    url(r'^enlever_groupe/(?P<group_id>\d+)/(?P<member_id>\d+)/$', deleteFromGroup, name = "deleteFromGroup"),
+    url(r'^enlever_activité/(?P<activity_id>\d+)/$', deleteActivity, name = "deleteActivity"),
     #url(r'^register/$', register, name='register'),
     #url(r'^admin/', include(admin.site.urls)),
 )
