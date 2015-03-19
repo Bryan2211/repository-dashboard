@@ -241,9 +241,12 @@
         </tr>
         </thead>
         <tbody>
+            
+        {% for homework in homeworkExList %}
+        
         <tr>
-            <td>Factorisation</td>
-            <td class="center">2012/09/24</td>
+            <td>{{ homework.title }}</td>
+            <td class="center"></td>
             <td class="center">
                 27
             </td>
@@ -254,10 +257,50 @@
                 71%
             </td>
         </tr>
+        
+        {% endfor %}
+        
+        {% for homework in homeworkQuList %}
+        
+        <tr>
+            <td> {{ homework.title }}</td>
+            <td class="center"></td>
+            <td class="center">
+                27
+            </td>
+            <td class="center">
+                5
+            </td>
+            <td class="center">
+                71%
+            </td>
+        </tr>
+        
+        {% endfor %}
+        
+        {% for homework in homeworkCoList %}
+        
+        <tr>
+            <td>{{ homework.title }}</td>
+            <td class="center"></td>
+            <td class="center">
+                27
+            </td>
+            <td class="center">
+                5
+            </td>
+            <td class="center">
+                71%
+            </td>
+        </tr>
+        
+        {% endfor %}
+        
+        
         <form class="formHomework" method="post" action=".">
             {% csrf_token %}
             {{ formHomework.as_p }}
-        <input class="btn btn-info" type="submit" value="Assigner le devoir">
+        <input class="btn btn-info" type="submit" name = "assignHomework" value="Assigner le devoir">
     </form>
     </tbody>
     </table>

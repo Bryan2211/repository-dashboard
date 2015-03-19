@@ -24,7 +24,7 @@ class Student(BaseProfile):
 #
 
 class Course(models.Model):
-    name = models.CharField(max_length=30, unique=True)
+    title = models.CharField(max_length=30, unique=True)
     description = models.TextField()
     difficulty = models.IntegerField()
     published = models.BooleanField(default=False)
@@ -40,7 +40,7 @@ class Course(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-      return self.name
+      return self.title
       
 #
 # Modèle de Florian pour les exercices
@@ -98,6 +98,6 @@ class AssignHomework(models.Model):
     group = models.ForeignKey(Group)
     exercise = models.ForeignKey(Exercise, null = True)
     quiz = models.ForeignKey(Quiz, null = True)
-    Course = models.ForeignKey(Course, null = True)
+    course = models.ForeignKey(Course, null = True)
     assigned_on = models.DateTimeField(auto_now=True)
     

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, render_to_response, get_object_or
 from django.contrib.auth import authenticate, login, logout
 from dashboard.forms import NewGroupForm, NewStudentForm, NewTeacherForm, AddHomeworkForm, SelectGroupForm, NewPasswordForm
 from django.core.urlresolvers import reverse
-from common.models import Group, Teacher, GroupMembers, Student
+from common.models import Group, Teacher, GroupMembers, Student, AssignHomework, Exercise, Quiz, Course
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
@@ -63,6 +63,9 @@ def group(request, group_id):
     group = Group.objects.get(id = group_id)
     studentList = group.student.all()
     teacherList = group.teacher.all()
+    homeworkExList = group.homeworkExercise.all()
+    homeworkQuList = group.homeworkQuiz.all()
+    homeworkCoList = group.homeworkCourse.all()
     
     if request.method == "POST":
         if 'addTeacher' in request.POST:
@@ -73,6 +76,7 @@ def group(request, group_id):
                 teacher = Teacher.objects.get(user = teacherUser)
                 newTeacherToGroup = GroupMembers(teacher = teacher, group = group)
                 newTeacherToGroup.save()
+                
         elif 'addStudent' in request.POST:
             formStudent = NewStudentForm(request.POST)
             if formStudent.is_valid():
@@ -81,6 +85,38 @@ def group(request, group_id):
                 student = Student.objects.get(user = studentUser)
                 newStudentToGroup = GroupMembers(student = student, group = group)
                 newStudentToGroup.save()
+                
+        elif 'assignHomework' in request.POST:
+            formHomework = AddHomeworkForm(request.POST)
+            erreur = False
+            if formHomework.is_valid():
+                homeworkid = formHomework.cleaned_data["homeworkid"]
+                genre = formHomework.cleaned_data["genre"]
+                
+                if genre == "exercise":
+                    try:
+                        exercise = Exercise.objects.get(id = homeworkid)
+                        newHomework = AssignHomework(exercise = exercise, group = group)
+                        newHomework.save()
+                    except Exercise.DoesNotExist:
+                        erreur = True
+                
+                if genre == "quiz":
+                    try:
+                        quiz = Quiz.objects.get(id = homeworkid)
+                        newHomework = AssignHomework(quiz = quiz, group = group)
+                        newHomework.save()
+                    except Quiz.DoesNotExist:
+                        erreur = True
+                
+                if genre == "course":
+                    try:
+                        cours = Course.objects.get(id = homeworkid)
+                        newHomework = AssignHomework(course = cours, group = group)
+                        newHomework.save()
+                    except Course.DoesNotExist:
+                        erreur = True
+                    
     else:
         formStudent = NewStudentForm()
         formTeacher = NewTeacherForm()
