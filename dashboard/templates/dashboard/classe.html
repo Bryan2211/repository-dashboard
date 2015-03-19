@@ -301,6 +301,11 @@
             {% csrf_token %}
             {{ formHomework.as_p }}
         <input class="btn btn-info" type="submit" name = "assignHomework" value="Assigner le devoir">
+        
+        {% if erreur %}
+        <p>Impossible d'assigner ce devoir.</br>Veuillez vérifier que l'exercice, quiz ou cours correspondant à cet id existe réellement.</p>
+        {% endif %}
+        
     </form>
     </tbody>
     </table>
