@@ -69,23 +69,37 @@ def group(request, group_id):
     
     if request.method == "POST":
         if 'addTeacher' in request.POST:
+            erreurTeacher = False
             formTeacher = NewTeacherForm(request.POST)
             if formTeacher.is_valid():
                 newTeacher = formTeacher.cleaned_data["nickname"]
-                teacherUser = User.objects.get(username = newTeacher)
-                teacher = Teacher.objects.get(user = teacherUser)
-                newTeacherToGroup = GroupMembers(teacher = teacher, group = group)
-                newTeacherToGroup.save()
+                try:
+                    try:
+                        teacherUser = User.objects.get(username = newTeacher)
+                        teacher = Teacher.objects.get(user = teacherUser)
+                        newTeacherToGroup = GroupMembers(teacher = teacher, group = group)
+                        newTeacherToGroup.save()
+                    except User.DoesNotExist:
+                        erreurTeacher = True
+                except Teacher.DoesNotExist:
+                    erreurTeacher = True
+                    
                 
         elif 'addStudent' in request.POST:
             formStudent = NewStudentForm(request.POST)
+            erreurStudent = False
             if formStudent.is_valid():
-                newStudent = formStudent.cleaned_data["nickname"]
-                studentUser = User.objects.get(username = newStudent)
-                student = Student.objects.get(user = studentUser)
-                newStudentToGroup = GroupMembers(student = student, group = group)
-                newStudentToGroup.save()
-                
+                try:
+                    try:
+                        newStudent = formStudent.cleaned_data["nickname"]
+                        studentUser = User.objects.get(username = newStudent)
+                        student = Student.objects.get(user = studentUser)
+                        newStudentToGroup = GroupMembers(student = student, group = group)
+                        newStudentToGroup.save()
+                    except User.DoesNotExist:
+                        erreurStudent = True
+                except Student.DoesNotExist:
+                    erreurStudent = True
         elif 'assignHomework' in request.POST:
             formHomework = AddHomeworkForm(request.POST)
             erreur = False
@@ -122,25 +136,4 @@ def group(request, group_id):
         formTeacher = NewTeacherForm()
         formHomework = AddHomeworkForm()
     return render(request, 'dashboard/templates/dashboard/classe.html', locals())
-    
-def addTeacher(request):
-    if request.method == "POST":
-        formTeacher = NewTeacherForm(request.POST)
-        if formTeacher.is_valid():
-            newTeacher = formTeacher.cleaned_data["nickname"]
-            teacherUser = User.objects.get(username = newTeacher)
-            teacher = Teacher.objects.get(user = teacherUser)
-            newTeacherToGroup = GroupMembers(teacher = teacher, group = group)
-            newTeacherToGroup.save()
-            
-def addStudent(request):
-    if request.method == "POST":
-        formStudent = NewStudentForm(request.POST)
-        if formStudent.is_valid():
-            newStudent = formStudent.cleaned_data["nickname"]
-            studentUser = User.objects.get(username = newStudent)
-            student = Student.objects.get(user = studentUser)
-            newStudentToGroup = GroupMembers(student = student, group = group)
-            newStudentToGroup.save()
-    
         

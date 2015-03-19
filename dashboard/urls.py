@@ -11,8 +11,6 @@ urlpatterns = patterns('teachers.views',
     url(r'^nouveau_groupe/$', newgroup, name='newgroup'),
     url(r'^manage/exercice/$', manage, name="manage"),
     url(r'^profil/$', profil, name = 'profil'),
-    url(r'^ajoutprofesseur/$', addTeacher, name = 'addTeacher'),
-    url(r'^ajoutétudiant/$', addStudent, name = 'addStudent'),
     #url(r'^register/$', register, name='register'),
     #url(r'^admin/', include(admin.site.urls)),
 )

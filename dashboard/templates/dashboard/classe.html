@@ -168,6 +168,10 @@
         <input class="btn btn-info" type="submit" name="addStudent" value="Ajouter l'élève">
     </form>
     
+    {% if erreurStudent %}
+    <p>Impossible d'ajouter cet élève.</br>Veuillez vérifier que le nom d'utilisateur entré correspond bien à un élève.</p>
+    {% endif %}
+    
     </tbody>
     </table>
     </div>
@@ -216,6 +220,10 @@
         {{ formTeacher.as_p }}
         <input class="btn btn-info" type="submit" name="addTeacher" value="Ajouter le professeur">
     </form>
+    
+    {% if erreurTeacher %}
+    <p>Impossible d'ajouter ce professeur.</br>Veuillez vérifier que le nom d'utilisateur entré correspond bien à un professeur.</p>
+    {% endif %}
     
     </tbody>
     </table>
