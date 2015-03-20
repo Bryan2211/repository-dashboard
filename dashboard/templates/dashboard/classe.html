@@ -148,7 +148,6 @@
     <thead>
     <tr>
         <th>Nom</th>
-        <th>Ajouté</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -158,7 +157,6 @@
 
     <tr>
         <td>{{ student.user.username }}</td>
-        <td class="center">{{ student.groupmembers_set.added_on }}</td>
         <td class="center">
                 <form class="deleteFromGroup" action = "{% url 'deleteFromGroup' group.id student.id %}" method="post" action=".">
                 {% csrf_token %}
@@ -197,16 +195,14 @@
     <thead>
     <tr>
         <th>Nom</th>
-        <th>Ajouté</th>
         <th>Actions</th>
     </tr>
     </thead>
     <tbody>
     {% for teacher in teacherList %}
-    
+
     <tr>
         <td>{{teacher.user.username}}</td>
-        <td class="center">{{ dateTeacher.added_on }}</td>
         <td class="center">
             <form class="deleteFromGroup" action = "{% url 'deleteFromGroup' group.id teacher.id %}" method="post" action=".">
                 {% csrf_token %}
@@ -245,7 +241,7 @@
         <thead>
         <tr>
             <th>Nom</th>
-            <th>Assigné</th>
+            <th>Type</th>
             <th>Actions</th>
 
         </tr>
@@ -256,7 +252,7 @@
         
         <tr>
             <td>{{ homework.title }}</td>
-            <td class="center"></td>
+            <td class="center">Exercice</td>
             <td class="center">
                 <form class="deleteFromGroup" action = "{% url 'deleteHomework' group.id homework.id %}" method="post" action=".">
                     {% csrf_token %}
@@ -271,7 +267,7 @@
         
         <tr>
             <td> {{ homework.title }}</td>
-            <td class="center"></td>
+            <td class="center">Quiz</td>
             <td class="center">
                 <form class="deleteFromGroup" action = "{% url 'deleteHomework' group.id homework.id %}" method="post" action=".">
                     {% csrf_token %}
@@ -286,7 +282,7 @@
         
         <tr>
             <td>{{ homework.title }}</td>
-            <td class="center"></td>
+            <td class="center">Cours</td>
             <td class="center">
                 <form class="deleteFromGroup" action = "{% url 'deleteHomework' group.id homework.id %}" method="post" action=".">
                     {% csrf_token %}

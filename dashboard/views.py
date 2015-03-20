@@ -186,20 +186,28 @@ def deleteActivity(request, activity_id):
 def deleteHomework(request, group_id, homework_id):
     if request.method == "POST":
         if 'deleteHomeworkEx' in request.POST:
-            exercise = Exercise.objects.get(id = homework_id)
+            exercise = Exercise.objects.filter(id = homework_id)
+            exercise = exercise[0]
             group = Group.objects.get(id = group_id)
-            assignedHomework = AssignHomework.objects.get(group = group, exercise = exercise)
+            assignedHomework = AssignHomework.objects.filter(group = group, exercise = exercise)
+            assignedHomework = assignedHomework[0]
             assignedHomework.delete()
         if 'deleteHomeworkQu' in request.POST:
-            quiz = Quiz.objects.get(id = homework_id)
+            quiz = Quiz.objects.filter(id = homework_id)
+            quiz = quiz[0]
             group = Group.objects.get(id = group_id)
-            assignedHomework = AssignHomework.objects.get(group = group, quiz = quiz)
+            assignedHomework = AssignHomework.objects.filter(group = group, quiz = quiz)
+            assignedHomework = assignedHomework[0]
             assignedHomework.delete()
         if 'deleteHomeworkCo' in request.POST:
-            course = Course.objects.get(id = homework_id)
+            course = Course.objects.filter(id = homework_id)
+            course = course[0]
             group = Group.objects.get(id = group_id)
-            assignedHomework = AssignHomework.objects.get(group = group, course = course)
+            assignedHomework = AssignHomework.objects.filter(group = group, course = course)
+            assignedHomework = assignedHomework[0]
             assignedHomework.delete()
     return redirect('group_view', group_id = group_id)
         
+def added_onDate(request, group_id, member_id):
+    pass
     
