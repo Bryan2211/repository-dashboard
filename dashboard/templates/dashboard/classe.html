@@ -246,9 +246,8 @@
         <tr>
             <th>Nom</th>
             <th>Assigné</th>
-            <th>Fait</th>
-            <th>Non-fait</th>
-            <th>Taux de réussite</th>
+            <th>Actions</th>
+
         </tr>
         </thead>
         <tbody>
@@ -259,13 +258,10 @@
             <td>{{ homework.title }}</td>
             <td class="center"></td>
             <td class="center">
-                -
-            </td>
-            <td class="center">
-                -
-            </td>
-            <td class="center">
-                -
+                <form class="deleteFromGroup" action = "{% url 'deleteHomework' group.id homework.id %}" method="post" action=".">
+                    {% csrf_token %}
+                    <input class="btn btn-danger" type="submit" name="deleteHomeworkEx" value="Retirer">
+                </form>
             </td>
         </tr>
         
@@ -277,13 +273,10 @@
             <td> {{ homework.title }}</td>
             <td class="center"></td>
             <td class="center">
-                -
-            </td>
-            <td class="center">
-                -
-            </td>
-            <td class="center">
-                -
+                <form class="deleteFromGroup" action = "{% url 'deleteHomework' group.id homework.id %}" method="post" action=".">
+                    {% csrf_token %}
+                    <input class="btn btn-danger" type="submit" name="deleteHomeworkQu" value="Retirer">
+                </form>
             </td>
         </tr>
         
@@ -295,15 +288,11 @@
             <td>{{ homework.title }}</td>
             <td class="center"></td>
             <td class="center">
-                -
+                <form class="deleteFromGroup" action = "{% url 'deleteHomework' group.id homework.id %}" method="post" action=".">
+                    {% csrf_token %}
+                    <input class="btn btn-danger" type="submit" name="deleteHomeworkCo" value="Retirer">
+                </form>
             </td>
-            <td class="center">
-                -
-            </td>
-            <td class="center">
-                -
-            </td>
-        </tr>
         
         {% endfor %}
         

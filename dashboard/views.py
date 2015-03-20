@@ -42,12 +42,12 @@ def profil(request):
     user = Teacher.objects.get(user = request.user)
     success = ''
     if request.method == "POST":
+        userProfile = request.user
         form = NewPasswordForm(request.POST)
         if form.is_valid():
-            currentPassword = form.cleaned_data["currentPassword"]
             password = form.cleaned_data["password"]
             passwordConfirm = form.cleaned_data["passwordConfirm"]
-            if password != passwordConfirm or currentPassword != request.user.password:
+            if password != passwordConfirm:
                 success = False
             else:
                 success = True
@@ -67,7 +67,7 @@ def group(request, group_id):
     homeworkExList = group.homeworkExercise.all()
     homeworkQuList = group.homeworkQuiz.all()
     homeworkCoList = group.homeworkCourse.all()
-    
+
     deleteConfirmation = False
     
     if request.method == "POST":
@@ -182,5 +182,24 @@ def deleteActivity(request, activity_id):
             course = Course.objects.get(id = activity_id)
             course.delete()
     return redirect('exercises')
+    
+def deleteHomework(request, group_id, homework_id):
+    if request.method == "POST":
+        if 'deleteHomeworkEx' in request.POST:
+            exercise = Exercise.objects.get(id = homework_id)
+            group = Group.objects.get(id = group_id)
+            assignedHomework = AssignHomework.objects.get(group = group, exercise = exercise)
+            assignedHomework.delete()
+        if 'deleteHomeworkQu' in request.POST:
+            quiz = Quiz.objects.get(id = homework_id)
+            group = Group.objects.get(id = group_id)
+            assignedHomework = AssignHomework.objects.get(group = group, quiz = quiz)
+            assignedHomework.delete()
+        if 'deleteHomeworkCo' in request.POST:
+            course = Course.objects.get(id = homework_id)
+            group = Group.objects.get(id = group_id)
+            assignedHomework = AssignHomework.objects.get(group = group, course = course)
+            assignedHomework.delete()
+    return redirect('group_view', group_id = group_id)
         
     
