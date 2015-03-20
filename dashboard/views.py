@@ -8,10 +8,13 @@ from django.http import HttpResponse
 
 
 def home(request):
-    user = request.user
-    return render_to_response('dashboard/templates/dashboard/index.html', locals())
+    voyelle = 'aeiouyàäâéèëêîïíìôöõòûüùúAEIOUY'
+    user = Teacher.objects.get(user = request.user)
+    firstLetter = request.user.username[0]
+    return render(request, 'dashboard/templates/dashboard/index.html', locals())
 
 def group(request, numGroup):
+    user = Teacher.objects.get(user = request.user)
     #group = get_object_or_404(Group, numGroup)
     if request.method == "POST":
         formStudent = NewStudentForm(request.POST)
@@ -27,9 +30,12 @@ def group(request, numGroup):
     return render(request, 'dashboard/templates/dashboard/classe.html', locals())
 
 def exercises(request):
-    return render_to_response('dashboard/templates/dashboard/exercises.html')
+    user = Teacher.objects.get(user = request.user)
+    return render(request, 'dashboard/templates/dashboard/exercises.html', locals())
     
 def newgroup(request):
+    success = False
+    user = Teacher.objects.get(user = request.user)
     if request.method == "POST":
         form = NewGroupForm(request.POST)
         if form.is_valid():
@@ -37,13 +43,13 @@ def newgroup(request):
             
             newGroup = Group.objects.create(name = group_name)
             newGroup.save()
-            teacherToGroup = GroupMembers(teacher = request.user, group = newGroup)
+            teacherToGroup = GroupMembers(teacher = user, group = newGroup)
             teacherToGroup.save()
-            return HttpResponse("Classe correctement créée")
+            success = True
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())
     
 def manage(request):
-    
+    user = Teacher.objects.get(user = request.user)
     return render(request, "dashboard/templates/dashboard/manage.html", locals())
     
         

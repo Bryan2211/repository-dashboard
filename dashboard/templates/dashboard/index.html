@@ -97,10 +97,11 @@
                         <li><a class="ajax-link" href="/dashboard/exercices/"><i class="glyphicon glyphicon-eye-open"></i><span> Exercices</span></a>
                         </li>
                         <li class="nav-header hidden-md">Classes</li>
-                        <li><a class="ajax-link" href="/dashboard/classe/"><span> 1ECG3</span></a></li>
-                        <li><a class="ajax-link" href="/dashboard/classe/"><span> 2EC3</span></a></li>
-                        <li><a class="ajax-link" href="/dashboard/classe/"><span> 1ECG1</span></a>
-                        </li>
+                        
+                        {% for group in user.group_set.all %}
+                        <li><a class="ajax-link" href="/dashboard/classe/"><span> {{ group.name }}</span></a></li>
+                        {% endfor %}
+                        
                         <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouvelle classe</span></a></li>
                     </ul>
                 </div>
@@ -120,7 +121,17 @@
             <!-- Début du contenu -->
             <div>
 </div>
-<h1>Dashboard de {{ user.username }}</h1>
+
+{% if firstLetter in voyelle %}
+
+<h1>Dashboard d'{{ request.user.username }}</h1>
+
+{% else %}
+
+<h1>Dashboard de {{ request.user.username }}</h1>
+
+{% endif %}
+
 <div>
     <div class="box col-md-4">
         <div class="box-inner">
@@ -179,36 +190,36 @@
 
 <!-- Javascript -->
 
-<script src="{% static 'dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
 
 <!-- Cookie -->
-<script src="{% static 'dashboard/js/jquery.cookie.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.cookie.js' %}"></script>
 <!-- Calendrier -->
-<script src="{% static 'dashboard/bower_components/moment/min/moment.min.js' %}"></script>
-<script src="{% static 'dashboard/bower_components/fullcalendar/dist/fullcalendar.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/moment/min/moment.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/fullcalendar/dist/fullcalendar.min.js' %}"></script>
 <!-- Données -->
-<script src="{% static 'dashboard/js/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.dataTables.min.js' %}"></script>
 
 <!-- Menu déroulant -->
-<script src="{% static 'dashboard/bower_components/chosen/chosen.jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/chosen/chosen.jquery.min.js' %}"></script>
 <!-- Images -->
-<script src="{% static 'dashboard/bower_components/colorbox/jquery.colorbox-min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/colorbox/jquery.colorbox-min.js' %}"></script>
 <!-- Notifications -->
-<script src="{% static 'dashboard/js/jquery.noty.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.noty.js' %}"></script>
 <!-- Tables responsive -->
-<script src="{% static 'dashboard/bower_components/responsive-tables/responsive-tables.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/responsive-tables/responsive-tables.js' %}"></script>
 <!-- tour plugin -->
-<script src="{% static 'dashboard/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js' %}"></script>
 <!-- Etoiles ( évaluation ) -->
-<script src="{% static 'dashboard/js/jquery.raty.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.raty.min.js' %}"></script>
 <!-- iOS -->
-<script src="{% static 'dashboard/js/jquery.iphone.toggle.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.iphone.toggle.js' %}"></script>
 <!-- Zones de textes croissantes -->
-<script src="{% static 'dashboard/js/jquery.autogrow-textarea.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.autogrow-textarea.js' %}"></script>
 <!-- Ajax et navigateur -->
-<script src="{% static 'dashboard/js/jquery.history.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.history.js' %}"></script>
 <!-- application script for Charisma demo -->
-<script src="{% static 'dashboard/js/charisma.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/charisma.js' %}"></script>
 
 
 

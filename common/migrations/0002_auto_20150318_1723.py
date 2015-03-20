@@ -7,13 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('common', '0003_groupmembers'),
+        ('common', '0001_initial'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='groupmembers',
-            name='added_on',
-            field=models.DateField(auto_now=True),
+            model_name='course',
+            name='author',
+            field=models.ForeignKey(to='common.Teacher'),
         ),
     ]

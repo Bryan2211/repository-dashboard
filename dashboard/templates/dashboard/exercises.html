@@ -97,10 +97,9 @@
                         <li><a class="ajax-link" href="/dashboard/exercices/"><i class="glyphicon glyphicon-eye-open"></i><span> Exercices</span></a>
                         </li>
                         <li class="nav-header hidden-md">Classes</li>
-                        <li><a class="ajax-link" href="/dashboard/classe/"><span> 1ECG3</span></a></li>
-                        <li><a class="ajax-link" href="/dashboard/classe/"><span> 2EC3</span></a></li>
-                        <li><a class="ajax-link" href="/dashboard/classe/"><span> 1ECG1</span></a>
-                        </li>
+                        {% for group in user.group_set.all %}
+                        <li><a class="ajax-link" href="/dashboard/classe/"><span> {{ group.name }}</span></a></li>
+                        {% endfor %}
                         <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouvelle classe</span></a></li>
                     </ul>
                 </div>
@@ -127,7 +126,7 @@
     <div class="box-inner">
         <div class="box-inner">
             <div class="box-header well" data-original-title="">
-                <h2><i class="glyphicon glyphicon-list"></i> Exercices récents</h2>
+                <h2><i class="glyphicon glyphicon-list"></i> Liste des exercices</h2>
             </div>
             <div class="box-content">
                 <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
@@ -135,15 +134,15 @@
                     <tr>
                         <th>Exercice</th>
                         <th>Ajouté</th>
-                        <th>Réalisé</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
+                    {% for exercise in user.exercise_set.all %}
+                    
                     <tr>
-                        <a href="#"><td>Factorisation 1er degré</td></a>
-                        <td class="center">2014/01/01</td>
-                        <td class="center">35 fois</td>
+                        <a href="#"><td>{{exercise.title}}</td></a>
+                        <td class="center">{{exercise.created_on}}</td>
                         <td class="center">
                             <a class="btn btn-info" href="#">
                             <i class="glyphicon glyphicon-eye-open"></i>
@@ -155,23 +154,8 @@
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <a href="#">
-                        <td>Factorisation 2ème degré</td>
-                        </a>
-                        <td class="center">2013/10/21</td>
-                        <td class="center">57 fois</td>
-                        <td class="center">
-                            <a class="btn btn-info" href="#">
-                            <i class="glyphicon glyphicon-eye-open"></i>
-                                Manager
-                            </a>
-                            <a class="btn btn-danger" href="#">
-                            <i class="glyphicon glyphicon-trash icon-white"></i>
-                                Supprimer
-                            </a>
-                        </td>
-                    </tr>
+                    
+                    {% endfor %}
                     <a class="btn btn-info" href="#">
                         Créer un exercice
                     </a>
@@ -181,31 +165,31 @@
         </div>
     </div>
 </div>
+
+
 <div>
     <div class="row">
     <div class="box col-md-12">
     <div class="box-inner">
         <div class="box-inner">
             <div class="box-header well" data-original-title="">
-                <h2><i class="glyphicon glyphicon-list"></i> Chapitres récents</h2>
+                <h2><i class="glyphicon glyphicon-list"></i> Liste des quiz</h2>
             </div>
             <div class="box-content">
                 <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
                     <thead>
                     <tr>
-                        <th>Chapitre</th>
+                        <th>Quiz</th>
                         <th>Ajouté</th>
-                        <th>Suivi</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
+                    {% for quiz in user.quiz_set.all %}
+                    
                     <tr>
-                        <a href="#">
-                        <td>Factorisation</td>
-                        </a>
-                        <td class="center">2014/05/12</td>
-                        <td class="center">47 fois</td>
+                        <a href="#"><td>{{quiz.title}}</td></a>
+                        <td class="center">{{quiz.creation_date}}</td>
                         <td class="center">
                             <a class="btn btn-info" href="#">
                             <i class="glyphicon glyphicon-eye-open"></i>
@@ -217,12 +201,45 @@
                             </a>
                         </td>
                     </tr>
+                    
+                    {% endfor %}
+                    
+                    <a class="btn btn-info" href="#">
+                        Créer un chapitre
+                    </a>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Fin du contenu -->
+</div>
+
+
+
+<div>
+    <div class="row">
+    <div class="box col-md-12">
+    <div class="box-inner">
+        <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+                <h2><i class="glyphicon glyphicon-list"></i> Liste des cours</h2>
+            </div>
+            <div class="box-content">
+                <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+                    <thead>
                     <tr>
-                        <a href="#">
-                        <td>Fonctions affines</td>
-                        </a>
-                        <td class="center">2014/07/23</td>
-                        <td class="center">25 fois</td>
+                        <th>Cours</th>
+                        <th>Ajouté</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for course in user.course_set.all %}
+                    
+                    <tr>
+                        <a href="#"><td>{{course.name}}</td></a>
+                        <td class="center">{{course.created_at}}</td>
                         <td class="center">
                             <a class="btn btn-info" href="#">
                             <i class="glyphicon glyphicon-eye-open"></i>
@@ -234,6 +251,9 @@
                             </a>
                         </td>
                     </tr>
+                    
+                    {% endfor %}
+                    
                     <a class="btn btn-info" href="#">
                         Créer un chapitre
                     </a>
@@ -251,36 +271,36 @@
 
 <!-- Javascript -->
 
-<script src="{% static 'dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
 
 <!-- Cookie -->
-<script src="{% static 'dashboard/js/jquery.cookie.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.cookie.js' %}"></script>
 <!-- Calendrier -->
-<script src="{% static 'dashboard/bower_components/moment/min/moment.min.js' %}"></script>
-<script src="{% static 'dashboard/bower_components/fullcalendar/dist/fullcalendar.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/moment/min/moment.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/fullcalendar/dist/fullcalendar.min.js' %}"></script>
 <!-- Données -->
-<script src="{% static 'dashboard/js/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.dataTables.min.js' %}"></script>
 
 <!-- Menu déroulant -->
-<script src="{% static 'dashboard/bower_components/chosen/chosen.jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/chosen/chosen.jquery.min.js' %}"></script>
 <!-- Images -->
-<script src="{% static 'dashboard/bower_components/colorbox/jquery.colorbox-min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/colorbox/jquery.colorbox-min.js' %}"></script>
 <!-- Notifications -->
-<script src="{% static 'dashboard/js/jquery.noty.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.noty.js' %}"></script>
 <!-- Tables responsive -->
-<script src="{% static 'dashboard/bower_components/responsive-tables/responsive-tables.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/responsive-tables/responsive-tables.js' %}"></script>
 <!-- tour plugin -->
-<script src="{% static 'dashboard/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js' %}"></script>
 <!-- Etoiles ( évaluation ) -->
-<script src="{% static 'dashboard/js/jquery.raty.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.raty.min.js' %}"></script>
 <!-- iOS -->
-<script src="{% static 'dashboard/js/jquery.iphone.toggle.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.iphone.toggle.js' %}"></script>
 <!-- Zones de textes croissantes -->
-<script src="{% static 'dashboard/js/jquery.autogrow-textarea.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.autogrow-textarea.js' %}"></script>
 <!-- Ajax et navigateur -->
-<script src="{% static 'dashboard/js/jquery.history.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.history.js' %}"></script>
 <!-- application script for Charisma demo -->
-<script src="{% static 'dashboard/js/charisma.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/charisma.js' %}"></script>
 
 
 
