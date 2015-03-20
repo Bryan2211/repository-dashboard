@@ -34,10 +34,6 @@ def newgroup(request):
         form = NewGroupForm()
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())
     
-def manage(request):
-    user = Teacher.objects.get(user = request.user)
-    return render(request, "dashboard/templates/dashboard/manage.html", locals())
-    
 def profil(request):
     user = Teacher.objects.get(user = request.user)
     success = ''
@@ -207,7 +203,4 @@ def deleteHomework(request, group_id, homework_id):
             assignedHomework = assignedHomework[0]
             assignedHomework.delete()
     return redirect('group_view', group_id = group_id)
-        
-def added_onDate(request, group_id, member_id):
-    pass
     

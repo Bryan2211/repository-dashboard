@@ -143,10 +143,6 @@
                         <a href="#"><td>{{exercise.title}}</td></a>
                         <td class="center">{{exercise.created_on}}</td>
                         <td class="center">
-                            <a class="btn btn-info" href="/dashboard/manage/exercice/">
-                            <i class="glyphicon glyphicon-eye-open"></i>
-                                Manager
-                            </a>
                             <form class="deleteActivity" action = "{% url 'deleteActivity' exercise.id %}" method="post" action=".">
                                 {% csrf_token %}
                                 <input class="btn btn-danger" type="submit" name="deleteExercise" value="Supprimer">
@@ -190,10 +186,6 @@
                         <a href="#"><td>{{quiz.title}}</td></a>
                         <td class="center">{{quiz.creation_date}}</td>
                         <td class="center">
-                            <a class="btn btn-info" href="/dashboard/manage/exercice/">
-                            <i class="glyphicon glyphicon-eye-open"></i>
-                                Manager
-                            </a>
                             <form class="deleteActivity" action = "{% url 'deleteActivity' quiz.id %}" method="post" action=".">
                                 {% csrf_token %}
                                 <input class="btn btn-danger" type="submit" name="deleteQuiz" value="Supprimer">
@@ -240,10 +232,6 @@
                         <a href="#"><td>{{course.title}}</td></a>
                         <td class="center">{{course.created_at}}</td>
                         <td class="center">
-                            <a class="btn btn-info" href="/dashboard/manage/exercice/">
-                            <i class="glyphicon glyphicon-eye-open"></i>
-                                Manager
-                            </a>
                             <form class = "deleteActivity" action = "{% url 'deleteActivity' course.id %}" method="post" action=".">
                                 {% csrf_token %}
                                 <input class="btn btn-danger" type="submit" name="deleteCourse" value="Supprimer">
