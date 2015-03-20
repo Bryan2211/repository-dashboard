@@ -19,14 +19,13 @@
     <title>Webmath</title>
 
     <!-- Styles -->
-    <link type = "test/css" id="bs-css" href="{% static 'dashboard/css/bootstrap-cerulean.min.css' %}" rel="stylesheet">
+    <link type = "test/css" href="{% static 'dashboard/css/bootstrap-cerulean.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/charisma-app.css' %}"/>
-    <link type="text/css" href="{% static 'dashboard/css/fullcalendar.css'%}" rel='stylesheet'/>
-    <link type="text/css" href="{% static 'dashboard/css/fullcalendar.print.css'%}" rel='stylesheet' media='print'>
-    <link type="text/css" href="{% static 'dashboard/css/chosen.min.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/colorbox.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/responsive-tables.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/bootstrap-tour.min.css'%}" rel='stylesheet'>
+    <link type="text/css" href="{% static 'dashboard/bower_components/fullcalendar/dist/fullcalendar.css'%}" rel='stylesheet'/>
+    <link type="text/css" href="{% static 'dashboard/bower_components/fullcalendar/dist/fullcalendar.print.css'%}" rel='stylesheet' media='print'>
+    <link type="text/css" href="{% static 'dashboard/bower_components/chosen/chosen.min.css'%}" rel='stylesheet'>
+    <link type="text/css" href="{% static 'dashboard/bower_components/responsive-tables/responsive-tables.css'%}" rel='stylesheet'>
+    <link type="text/css" href="{% static 'dashboard/bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css'%}" rel='stylesheet'>
     <link type="text/css" href="{% static 'dashboard/css/jquery.noty.css'%}" rel='stylesheet'>
     <link type="text/css" href="{% static 'dashboard/css/noty_theme_default.css'%}" rel='stylesheet'>
     <link type="text/css" href="{% static 'dashboard/css/elfinder.min.css'%}" rel='stylesheet'>
@@ -36,7 +35,7 @@
     <link type="text/css" href="{% static 'dashboard/css/animate.min.css'%}" rel='stylesheet'>
 
     <!-- jQuery -->
-    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="{% static 'dashboard/bower_components/jquery/jquery.min.js' %}"></script>
 
 </head>
 
@@ -57,12 +56,12 @@
             <!-- Début du menu déroulant du compte -->
             <div class="btn-group pull-right">
                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> Compte</span>
+                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> {{ request.user.username }}</span>
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
                     <li><a href="/dashboard/home/">Dashboard</a></li>
-                    <li><a href="#">Profil</a></li>
+                    <li><a href="/dashboard/profil/">Profil</a></li>
                     <li class="divider"></li>
                     <li><a href="/common/logout/">Déconnexion</a></li>
                 </ul>
@@ -96,11 +95,11 @@
                         </li>
                         <li><a class="ajax-link" href="/dashboard/exercices/"><i class="glyphicon glyphicon-eye-open"></i><span> Exercices</span></a>
                         </li>
-                        <li class="nav-header hidden-md">Classes</li>
+                        <li class="nav-header hidden-md">Groupes</li>
                         {% for group in user.group_set.all %}
-                        <li><a class="ajax-link" href="/dashboard/classe/"><span> {{ group.name }}</span></a></li>
+                        <li><a class="ajax-link" href="{% url 'group_view' group.id %}"><span> {{ group.name }}</span></a></li>
                         {% endfor %}
-                        <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouvelle classe</span></a></li>
+                        <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouveau groupe</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -121,10 +120,21 @@
     </div>
     
     <div class="classdelete">
-        <a class="btn btn-danger" href="#">
-                <i class="glyphicon glyphicon-trash icon-white"></i>
-                Supprimer la classe
-            </a>
+        {% if deleteConfirmation == False %}
+            <form class="deleteClass" method="post" action=".">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" name="deleteClass" value="Supprimer la classe">
+            </form>
+        {% endif %}
+        
+        {% if deleteConfirmation %}
+            <p>Rappuyez sur le bouton pour confirmer la suppression de la classe.</p>
+            <form class="deleteClass" method="post" action=".">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" name="deleteClassConfirm" value="Supprimer la classe">
+            </form>
+        {% endif %}
+        
     </div>
 
     <div class="row">
@@ -138,26 +148,20 @@
     <thead>
     <tr>
         <th>Nom</th>
-        <th>Ajouté</th>
         <th>Actions</th>
     </tr>
     </thead>
     <tbody>
     
-    {% for student in group.student.all %}
-    
+    {% for student in studentList %}
+
     <tr>
-        <td>{{ student.username }}</td>
-        <td class="center">{{ student.added_on_set }}</td>
+        <td>{{ student.user.username }}</td>
         <td class="center">
-            <a class="btn btn-success" href="#">
-                <i class="glyphicon glyphicon-zoom-in icon-white"></i>
-                Afficher
-            </a>
-            <a class="btn btn-danger" href="#">
-                <i class="glyphicon glyphicon-trash icon-white"></i>
-                Supprimer
-            </a>
+                <form class="deleteFromGroup" action = "{% url 'deleteFromGroup' group.id student.id %}" method="post" action=".">
+                {% csrf_token %}
+                <input class="btn btn-danger" type="submit" name="deleteStudent" value="Retirer">
+                </form>
         </td>
     </tr>
     
@@ -166,8 +170,12 @@
     <form class="formStudent" method="post" action=".">
         {% csrf_token %}
         {{ formStudent.as_p }}
-        <input class="btn btn-info" type="submit" value="Ajouter l'élève">
+        <input class="btn btn-info" type="submit" name="addStudent" value="Ajouter l'élève">
     </form>
+    
+    {% if erreurStudent %}
+    <p>Impossible d'ajouter cet élève.</br>Veuillez vérifier que le nom d'utilisateur entré correspond bien à un élève.</p>
+    {% endif %}
     
     </tbody>
     </table>
@@ -187,25 +195,19 @@
     <thead>
     <tr>
         <th>Nom</th>
-        <th>Ajouté</th>
         <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    {% for teacher in group.teacher.all %}
-    
+    {% for teacher in teacherList %}
+
     <tr>
-        <td>{{teacher.username}}</td>
-        <td class="center">{{ teacher.added_on_set }}</td>
+        <td>{{teacher.user.username}}</td>
         <td class="center">
-            <a class="btn btn-success" href="#">
-                <i class="glyphicon glyphicon-zoom-in icon-white"></i>
-                Afficher
-            </a>
-            <a class="btn btn-danger" href="#">
-                <i class="glyphicon glyphicon-trash icon-white"></i>
-                Supprimer
-            </a>
+            <form class="deleteFromGroup" action = "{% url 'deleteFromGroup' group.id teacher.id %}" method="post" action=".">
+                {% csrf_token %}
+                <input class="btn btn-danger" type="submit" name="deleteTeacher" value="Retirer">
+            </form>
         </td>
     </tr>
     
@@ -215,8 +217,12 @@
      <form class="formTeacher" method="post" action=".">
         {% csrf_token %}
         {{ formTeacher.as_p }}
-        <input class="btn btn-info" type="submit" value="Ajouter le professeur">
+        <input class="btn btn-info" type="submit" name="addTeacher" value="Ajouter le professeur">
     </form>
+    
+    {% if erreurTeacher %}
+    <p>Impossible d'ajouter ce professeur.</br>Veuillez vérifier que le nom d'utilisateur entré correspond bien à un professeur.</p>
+    {% endif %}
     
     </tbody>
     </table>
@@ -235,29 +241,68 @@
         <thead>
         <tr>
             <th>Nom</th>
-            <th>Assigné</th>
-            <th>Fait</th>
-            <th>Non-fait</th>
-            <th>Taux de réussite</th>
+            <th>Type</th>
+            <th>Actions</th>
+
         </tr>
         </thead>
         <tbody>
+            
+        {% for homework in homeworkExList %}
+        
         <tr>
-            <td>Factorisation</td>
-            <td class="center">2012/09/24</td>
+            <td>{{ homework.title }}</td>
+            <td class="center">Exercice</td>
             <td class="center">
-                27
-            </td>
-            <td class="center">
-                5
-            </td>
-            <td class="center">
-                71%
+                <form class="deleteFromGroup" action = "{% url 'deleteHomework' group.id homework.id %}" method="post" action=".">
+                    {% csrf_token %}
+                    <input class="btn btn-danger" type="submit" name="deleteHomeworkEx" value="Retirer">
+                </form>
             </td>
         </tr>
-        <a class="btn btn-info" href="#">
-            Assigner un devoir
-        </a>
+        
+        {% endfor %}
+        
+        {% for homework in homeworkQuList %}
+        
+        <tr>
+            <td> {{ homework.title }}</td>
+            <td class="center">Quiz</td>
+            <td class="center">
+                <form class="deleteFromGroup" action = "{% url 'deleteHomework' group.id homework.id %}" method="post" action=".">
+                    {% csrf_token %}
+                    <input class="btn btn-danger" type="submit" name="deleteHomeworkQu" value="Retirer">
+                </form>
+            </td>
+        </tr>
+        
+        {% endfor %}
+        
+        {% for homework in homeworkCoList %}
+        
+        <tr>
+            <td>{{ homework.title }}</td>
+            <td class="center">Cours</td>
+            <td class="center">
+                <form class="deleteFromGroup" action = "{% url 'deleteHomework' group.id homework.id %}" method="post" action=".">
+                    {% csrf_token %}
+                    <input class="btn btn-danger" type="submit" name="deleteHomeworkCo" value="Retirer">
+                </form>
+            </td>
+        
+        {% endfor %}
+        
+        
+        <form class="formHomework" method="post" action=".">
+            {% csrf_token %}
+            {{ formHomework.as_p }}
+        <input class="btn btn-info" type="submit" name = "assignHomework" value="Assigner le devoir">
+        
+        {% if erreur %}
+        <p>Impossible d'assigner ce devoir.</br>Veuillez vérifier que l'exercice, quiz ou cours correspondant à cet id existe réellement.</p>
+        {% endif %}
+        
+    </form>
     </tbody>
     </table>
     </div>

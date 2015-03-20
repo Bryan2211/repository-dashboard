@@ -20,7 +20,7 @@
     Connexion réussie! Bienvenue {{ user.username }}!
     <form method="post" action="{% url 'common:connexion' %}">
         {% csrf_token %}
-        <button type="submit" />Se déconnecter</button>
+        <button type="submit" href = "/common/deconnexion/"/>Se déconnecter</button>
     </form>
     
     {% else %}

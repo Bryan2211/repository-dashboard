@@ -19,14 +19,13 @@
     <title>Webmath</title>
 
     <!-- Styles -->
-    <link type = "test/css" id="bs-css" href="{% static 'dashboard/css/bootstrap-cerulean.min.css' %}" rel="stylesheet">
+    <link type = "test/css" href="{% static 'dashboard/css/bootstrap-cerulean.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/charisma-app.css' %}"/>
-    <link type="text/css" href="{% static 'dashboard/css/fullcalendar.css'%}" rel='stylesheet'/>
-    <link type="text/css" href="{% static 'dashboard/css/fullcalendar.print.css'%}" rel='stylesheet' media='print'>
-    <link type="text/css" href="{% static 'dashboard/css/chosen.min.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/colorbox.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/responsive-tables.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/bootstrap-tour.min.css'%}" rel='stylesheet'>
+    <link type="text/css" href="{% static 'dashboard/bower_components/fullcalendar/dist/fullcalendar.css'%}" rel='stylesheet'/>
+    <link type="text/css" href="{% static 'dashboard/bower_components/fullcalendar/dist/fullcalendar.print.css'%}" rel='stylesheet' media='print'>
+    <link type="text/css" href="{% static 'dashboard/bower_components/chosen/chosen.min.css'%}" rel='stylesheet'>
+    <link type="text/css" href="{% static 'dashboard/bower_components/responsive-tables/responsive-tables.css'%}" rel='stylesheet'>
+    <link type="text/css" href="{% static 'dashboard/bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css'%}" rel='stylesheet'>
     <link type="text/css" href="{% static 'dashboard/css/jquery.noty.css'%}" rel='stylesheet'>
     <link type="text/css" href="{% static 'dashboard/css/noty_theme_default.css'%}" rel='stylesheet'>
     <link type="text/css" href="{% static 'dashboard/css/elfinder.min.css'%}" rel='stylesheet'>
@@ -36,7 +35,7 @@
     <link type="text/css" href="{% static 'dashboard/css/animate.min.css'%}" rel='stylesheet'>
 
     <!-- jQuery -->
-    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="{% static 'dashboard/bower_components/jquery/jquery.min.js' %}"></script>
 
 </head>
 
@@ -57,12 +56,12 @@
             <!-- Début du menu déroulant du compte -->
             <div class="btn-group pull-right">
                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> Compte</span>
+                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> {{ request.user.username }}</span>
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
                     <li><a href="/dashboard/home/">Dashboard</a></li>
-                    <li><a href="#">Profil</a></li>
+                    <li><a href="/dashboard/profil/">Profil</a></li>
                     <li class="divider"></li>
                     <li><a href="/common/logout/">Déconnexion</a></li>
                 </ul>
@@ -96,11 +95,11 @@
                         </li>
                         <li><a class="ajax-link" href="/dashboard/exercices/"><i class="glyphicon glyphicon-eye-open"></i><span> Exercices</span></a>
                         </li>
-                        <li class="nav-header hidden-md">Classes</li>
+                        <li class="nav-header hidden-md">Groupes</li>
                         {% for group in user.group_set.all %}
-                        <li><a class="ajax-link" href="/dashboard/classe/"><span> {{ group.name }}</span></a></li>
+                        <li><a class="ajax-link" href="{% url 'group_view' group.id %}"><span> {{ group.name }}</span></a></li>
                         {% endfor %}
-                        <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouvelle classe</span></a></li>
+                        <li><a class="ajax-link" href="/dashboard/nouveau_groupe/"><i class="glyphicon glyphicon-plus"></i><span> Nouveau groupe</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -134,6 +133,7 @@
                     <tr>
                         <th>Exercice</th>
                         <th>Ajouté</th>
+                        <th>Id</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -143,15 +143,12 @@
                     <tr>
                         <a href="#"><td>{{exercise.title}}</td></a>
                         <td class="center">{{exercise.created_on}}</td>
+                        <td class="center">{{exercise.id }}</td>
                         <td class="center">
-                            <a class="btn btn-info" href="#">
-                            <i class="glyphicon glyphicon-eye-open"></i>
-                                Manager
-                            </a>
-                            <a class="btn btn-danger" href="#">
-                            <i class="glyphicon glyphicon-trash icon-white"></i>
-                                Supprimer
-                            </a>
+                            <form class="deleteActivity" action = "{% url 'deleteActivity' exercise.id %}" method="post" action=".">
+                                {% csrf_token %}
+                                <input class="btn btn-danger" type="submit" name="deleteExercise" value="Supprimer">
+                            </form>
                         </td>
                     </tr>
                     
@@ -181,6 +178,7 @@
                     <tr>
                         <th>Quiz</th>
                         <th>Ajouté</th>
+                        <th>Id</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -190,15 +188,12 @@
                     <tr>
                         <a href="#"><td>{{quiz.title}}</td></a>
                         <td class="center">{{quiz.creation_date}}</td>
+                        <td class="center">{{quiz.id}}</td>
                         <td class="center">
-                            <a class="btn btn-info" href="#">
-                            <i class="glyphicon glyphicon-eye-open"></i>
-                                Manager
-                            </a>
-                            <a class="btn btn-danger" href="#">
-                            <i class="glyphicon glyphicon-trash icon-white"></i>
-                                Supprimer
-                            </a>
+                            <form class="deleteActivity" action = "{% url 'deleteActivity' quiz.id %}" method="post" action=".">
+                                {% csrf_token %}
+                                <input class="btn btn-danger" type="submit" name="deleteQuiz" value="Supprimer">
+                            </form>
                         </td>
                     </tr>
                     
@@ -231,6 +226,7 @@
                     <tr>
                         <th>Cours</th>
                         <th>Ajouté</th>
+                        <th>Id</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -238,17 +234,14 @@
                     {% for course in user.course_set.all %}
                     
                     <tr>
-                        <a href="#"><td>{{course.name}}</td></a>
+                        <a href="#"><td>{{course.title}}</td></a>
                         <td class="center">{{course.created_at}}</td>
+                        <td class="center">{{course.id}}</td>
                         <td class="center">
-                            <a class="btn btn-info" href="#">
-                            <i class="glyphicon glyphicon-eye-open"></i>
-                                Manager
-                            </a>
-                            <a class="btn btn-danger" href="#">
-                            <i class="glyphicon glyphicon-trash icon-white"></i>
-                                Supprimer
-                            </a>
+                            <form class = "deleteActivity" action = "{% url 'deleteActivity' course.id %}" method="post" action=".">
+                                {% csrf_token %}
+                                <input class="btn btn-danger" type="submit" name="deleteCourse" value="Supprimer">
+                            </form>
                         </td>
                     </tr>
                     

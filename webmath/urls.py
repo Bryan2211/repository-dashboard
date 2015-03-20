@@ -10,5 +10,5 @@ urlpatterns = patterns('',
     url(r'^common/', include('common.urls', namespace="common")),
     url(r'^permission/', include('permission.urls', namespace="permission")),
     url(r'^dashboard/', include('dashboard.urls')),
-    url(r'^$' , RedirectView.as_view(pattern_name='common.connexion')),
+    url(r'^$' , RedirectView.as_view(pattern_name='common:deconnexion')),
 )
