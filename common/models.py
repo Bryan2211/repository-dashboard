@@ -1,12 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+#Profile de base découlant de User
+
 class BaseProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User) #Donne les attributs de User à BaseProfile
     avatar = models.ImageField(null=True, blank=True, upload_to="avatars/")
         
     class Meta:
         abstract = True
+
+
+#Les deux modèles héritent de BaseProfile et donc de User
 
 class Teacher(BaseProfile):
 
@@ -75,24 +81,29 @@ class Quiz(models.Model): #Infos générales sur le quiz
         
         
 
-
+#Modèle pour les groupes
 class Group(models.Model):
     name = models.CharField(max_length=30)
     teacher = models.ManyToManyField(Teacher, through='GroupMembers')
     student = models.ManyToManyField(Student, through = 'GroupMembers')
-    homeworkExercise = models.ManyToManyField(Exercise, through = 'AssignHomework')
-    homeworkCourse = models.ManyToManyField(Course, through = 'AssignHomework')
-    homeworkQuiz = models.ManyToManyField(Quiz, through = 'AssignHomework')
+    homeworkExercise = models.ManyToManyField(Exercise, through = 'AssignHomework') #uniquement les devoirs exercices
+    homeworkCourse = models.ManyToManyField(Course, through = 'AssignHomework') #uniquement les devoirs quiz
+    homeworkQuiz = models.ManyToManyField(Quiz, through = 'AssignHomework') #uniquement les devoirs cours
     created_on = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return"Classe {0}".format(self.name)
-    
+
+
+#Table intermédiaire pour affecter un membre à un groupe
+
 class GroupMembers(models.Model):
     teacher = models.ForeignKey(Teacher, null = True)
     student = models.ForeignKey(Student, null = True)
     group = models.ForeignKey(Group)
     added_on = models.DateTimeField(auto_now=True)
+    
+#Table intermédiaire pour assigner un devoir à un groupe    
     
 class AssignHomework(models.Model):
     group = models.ForeignKey(Group)
