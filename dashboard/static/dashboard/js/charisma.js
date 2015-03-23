@@ -134,13 +134,6 @@ function docReady() {
         e.preventDefault();
     });
 
-    //notifications
-    $('.noty').click(function (e) {
-        e.preventDefault();
-        var options = $.parseJSON($(this).attr('data-noty-options'));
-        noty(options);
-    });
-
     //chosen - improves select
     $('[data-rel="chosen"],[rel="chosen"]').chosen();
 
@@ -155,19 +148,9 @@ function docReady() {
     //tooltip
     $('[data-toggle="tooltip"]').tooltip();
 
-    //auto grow textarea
-    $('textarea.autogrow').autogrow();
-
     //popover
     $('[data-toggle="popover"]').popover();
 
-    //iOS / iPhone style toggle switch
-    $('.iphone-toggle').iphoneStyle();
-
-    //star rating
-    $('.raty').raty({
-        score: 4 //default stars
-    });
 
     //uploadify - multiple uploads
     $('#file_upload').uploadify({
