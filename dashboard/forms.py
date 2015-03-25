@@ -15,7 +15,7 @@ class NewTeacherForm(forms.Form):
 
 #Pour assigner un devoir à un groupe   
 class AddHomeworkForm(forms.Form):
-    homeworkid = forms.CharField(label="Id de l'exercice", max_length=30)
+    homeworkid = forms.CharField(label="Numéro de l'exercice", max_length=30)
     #Choisir selon le type d'activité
     genre = forms.ChoiceField(label="Type de devoir", choices =(
         ("exercise", "Exercice"),
