@@ -108,6 +108,9 @@
                 <div>
     </div>
     
+    <h3>{{ group.name }}</h3>
+    <p>Créé le {{ group.created_on }}</p>
+    
     <div class="classdelete">
         {% if deleteConfirmation == False %}
             <form class="deleteClass" method="post" action=".">
