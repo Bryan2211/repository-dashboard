@@ -111,4 +111,5 @@ class AssignHomework(models.Model):
     quiz = models.ForeignKey(Quiz, null = True)
     course = models.ForeignKey(Course, null = True)
     assigned_on = models.DateTimeField(auto_now=True)
+    date = models.CharField(max_length = 20, default = "Demain")
     

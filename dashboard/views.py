@@ -113,7 +113,7 @@ def group(request, group_id):
             if formHomework.is_valid():
                 homeworkid = formHomework.cleaned_data["homeworkid"]
                 genre = formHomework.cleaned_data["genre"]
-                
+
                 #Cherche l'activité selon le genre choisi
                 if genre == "exercise":
                     try:

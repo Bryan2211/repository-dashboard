@@ -22,7 +22,6 @@ class AddHomeworkForm(forms.Form):
         ("quiz", "Quiz"),
         ("course", "Cours"),
         ))
-
 #Changement de mot de passe
 class NewPasswordForm(forms.Form):
     password = forms.CharField(label='Nouveau mot de passe', widget=forms.PasswordInput(attrs={'class' : 'form-control'}))
