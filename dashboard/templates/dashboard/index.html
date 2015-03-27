@@ -21,18 +21,7 @@
     <!-- Styles -->
     <link type = "test/css" href="{% static 'dashboard/css/bootstrap-cerulean.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/charisma-app.css' %}"/>
-    <link type="text/css" href="{% static 'dashboard/bower_components/fullcalendar/dist/fullcalendar.css'%}" rel='stylesheet'/>
-    <link type="text/css" href="{% static 'dashboard/bower_components/fullcalendar/dist/fullcalendar.print.css'%}" rel='stylesheet' media='print'>
-    <link type="text/css" href="{% static 'dashboard/bower_components/chosen/chosen.min.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/bower_components/responsive-tables/responsive-tables.css'%}" rel='stylesheet'>
     <link type="text/css" href="{% static 'dashboard/bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/jquery.noty.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/noty_theme_default.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/elfinder.min.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/elfinder.theme.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/jquery.iphone.toggle.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/uploadify.css'%}" rel='stylesheet'>
-    <link type="text/css" href="{% static 'dashboard/css/animate.min.css'%}" rel='stylesheet'>
 
     <!-- jQuery -->
     <script src="{% static 'dashboard/bower_components/jquery/jquery.min.js' %}"></script>
@@ -131,60 +120,7 @@
 
 {% endif %}
 
-<div>
-    <div class="box col-md-4">
-        <div class="box-inner">
-            <div class="box-header well" data-original-title="">
-                <h2><i class="glyphicon glyphicon-list"></i> Statistiques hebdomadaires</h2>
-            </div>
-            <div class="box-content">
-                <ul class="dashboard-list">
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-arrow-up"></i>
-                            <span class="green">92</span>
-                            Exercices réalisés
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-arrow-down"></i>
-                            <span class="red">67</span>
-                            Exercices réussis
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-minus"></i>
-                            <span class="blue">25</span>
-                            Exercices faux
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-comment"></i>
-                            <span class="yellow">12</span>
-                            Commentaires
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<div>
-    <div class="box col-md-4">
-        <div class="box-inner">
-            <div class="box-header well" data-original-title="">
-                <h2><i class="glyphicon glyphicon-list"></i> Groupe de la semaine</h2>
-            </div>
-            <div class="box-content">
-                <h2><a class="ajax-link" href="classe.html">1ECG3</a></h2>
-                <p>86% de réussite aux exercices</p>
-            </div>
-        </div>
-    </div>
-</div>
+
     <!-- Fin du contenu -->
 
 <!-- Javascript -->
@@ -193,30 +129,8 @@
 
 <!-- Cookie -->
 <script type="text/javascript" src="{% static 'dashboard/js/jquery.cookie.js' %}"></script>
-<!-- Calendrier -->
-<script type="text/javascript" src="{% static 'dashboard/bower_components/moment/min/moment.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'dashboard/bower_components/fullcalendar/dist/fullcalendar.min.js' %}"></script>
-<!-- Données -->
-<script type="text/javascript" src="{% static 'dashboard/js/jquery.dataTables.min.js' %}"></script>
-
-<!-- Menu déroulant -->
-<script type="text/javascript" src="{% static 'dashboard/bower_components/chosen/chosen.jquery.min.js' %}"></script>
-<!-- Images -->
-<script type="text/javascript" src="{% static 'dashboard/bower_components/colorbox/jquery.colorbox-min.js' %}"></script>
-<!-- Notifications -->
-<script type="text/javascript" src="{% static 'dashboard/js/jquery.noty.js' %}"></script>
-<!-- Tables responsive -->
-<script type="text/javascript" src="{% static 'dashboard/bower_components/responsive-tables/responsive-tables.js' %}"></script>
 <!-- tour plugin -->
 <script type="text/javascript" src="{% static 'dashboard/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js' %}"></script>
-<!-- Etoiles ( évaluation ) -->
-<script type="text/javascript" src="{% static 'dashboard/js/jquery.raty.min.js' %}"></script>
-<!-- iOS -->
-<script type="text/javascript" src="{% static 'dashboard/js/jquery.iphone.toggle.js' %}"></script>
-<!-- Zones de textes croissantes -->
-<script type="text/javascript" src="{% static 'dashboard/js/jquery.autogrow-textarea.js' %}"></script>
-<!-- Ajax et navigateur -->
-<script type="text/javascript" src="{% static 'dashboard/js/jquery.history.js' %}"></script>
 <!-- application script for Charisma demo -->
 <script type="text/javascript" src="{% static 'dashboard/js/charisma.js' %}"></script>
 
