@@ -5,8 +5,10 @@ from django.core.urlresolvers import reverse
 from common.models import Group, Teacher, GroupMembers, Student, AssignHomework, Exercise, Quiz, Course
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 #Accueil du dashboard
+@login_required(login_url='/common/login/')
 def home(request):
     voyelle = 'aeiouyàäâéèëêîïíìôöõòûüùúAEIOUY' #Pour déterminer si le template affiche De ou D'
     user = Teacher.objects.get(user = request.user)
@@ -14,11 +16,13 @@ def home(request):
     return render(request, 'dashboard/templates/dashboard/index.html', locals())
 
 #Exercices, quiz et cours
+@login_required(login_url='/common/login/')
 def exercises(request):
     user = Teacher.objects.get(user = request.user)
     return render(request, 'dashboard/templates/dashboard/exercises.html', locals())
 
 #Création de groupe
+@login_required(login_url='/common/login/')
 def newgroup(request):
     success = False
     user = Teacher.objects.get(user = request.user)
@@ -37,6 +41,7 @@ def newgroup(request):
     return render(request, "dashboard/templates/dashboard/newclass.html", locals())
 
 #Changement de mot de passe
+@login_required(login_url='/common/login/')
 def profil(request):
     user = Teacher.objects.get(user = request.user)
     success = ''
@@ -57,6 +62,7 @@ def profil(request):
         form = NewPasswordForm()
     return render(request, 'dashboard/templates/dashboard/profile.html', locals())
     
+@login_required(login_url='/common/login/')    
 def group(request, group_id):
     user = Teacher.objects.get(user = request.user)
     group = Group.objects.get(id = group_id)
@@ -159,6 +165,7 @@ def group(request, group_id):
     return render(request, 'dashboard/templates/dashboard/classe.html', locals())
 
 #Retirer d'un groupe
+@login_required(login_url='/common/login/')
 def deleteFromGroup(request, member_id, group_id):
     if request.method == "POST":
         
@@ -180,6 +187,7 @@ def deleteFromGroup(request, member_id, group_id):
     return redirect('group_view', group_id = group_id)
 
 #Supprimer une activité
+@login_required(login_url='/common/login/')
 def deleteActivity(request, activity_id):
     if request.method == "POST":
         
@@ -195,7 +203,8 @@ def deleteActivity(request, activity_id):
             course.delete()
     return redirect('exercises')
 
-#Retirer un devoir   
+#Retirer un devoir 
+@login_required(login_url='/common/login/')
 def deleteHomework(request, group_id, homework_id):
     if request.method == "POST":
         

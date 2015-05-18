@@ -124,15 +124,15 @@
     <div class="box col-md-12">
     <div class="box-inner">
     <div class="box-header well" data-original-title="">
-        <h2><i class="glyphicon glyphicon-user"></i> Elèves</h2>
+        <h2><i class="glyphicon glyphicon-user"></i> Groupes</h2>
     </div>
     <div class="box-content">
     <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
     <thead>
     <tr>
         <th>Groupe</th>
-        <th>Nbre élèves</th>
-        <th>Nbre professeurs</th>
+        <th>Nbre d'élèves</th>
+        <th>Nbre de professeurs</th>
         <th>Créé le</th>
     </tr>
     </thead>
@@ -142,11 +142,11 @@
 
     <tr>
         <td><a class="ajax-link" href="{% url 'group_view' group.id %}">{{ group.name }}</a></td>
-        <td class="center">
-            {{ len(group.student) }}
+        <td class = "center">
+            {{ group.student.count }} élève(s)
         </td>
-        <td class="center">
-            {{ len(group.teacher) }}
+        <td class = "center">
+            {{ group.teacher.count }} professeur(s)
         </td>
         <td class="center">
             {{ group.created_on }}

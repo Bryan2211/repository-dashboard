@@ -36,14 +36,14 @@ def connexion(request):
             else:
                 erreur = True
     else:
-        next_url = request.GET.get('next', '')
+        next_url = request.GET.get('next', '/dashboard/home/')
         form = LoginForm()
 
     return render(request, "common/login.html", locals())
 
 def deconnexion(request):
     logout(request)
-    return redirect('/')
+    return redirect('/common/login/')
 
 
 def register(request):
