@@ -120,6 +120,47 @@
 
 {% endif %}
 
+<div class="row">
+    <div class="box col-md-12">
+    <div class="box-inner">
+    <div class="box-header well" data-original-title="">
+        <h2><i class="glyphicon glyphicon-user"></i> Elèves</h2>
+    </div>
+    <div class="box-content">
+    <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+    <thead>
+    <tr>
+        <th>Groupe</th>
+        <th>Nbre élèves</th>
+        <th>Nbre professeurs</th>
+        <th>Créé le</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+    {% for group in user.group_set.all %}
+
+    <tr>
+        <td><a class="ajax-link" href="{% url 'group_view' group.id %}">{{ group.name }}</a></td>
+        <td class="center">
+            {{ len(group.student) }}
+        </td>
+        <td class="center">
+            {{ len(group.teacher) }}
+        </td>
+        <td class="center">
+            {{ group.created_on }}
+        </td>
+    </tr>
+    
+    {% endfor %}
+    
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>
 
     <!-- Fin du contenu -->
 
