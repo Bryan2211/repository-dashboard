@@ -1,34 +1,42 @@
 <!DOCTYPE html>
+<html>
 
 <head>
-    
+
     <meta charset="utf-8" />
     <title>Connexion</title>
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+
 </head>
 <body>
-    
-    <h1>Veuillez remplir les champs suivants:</h1>
-    
-    <button onclick="window.location.href='{% url 'common:register' %}'">S'inscrire</button>
-    
-    {% if erreur %}
-    <p><strong>Connexion échouée</strong></p>
-    {% endif %}
-    
-    {% if user.is_authenticated %}
-    Connexion réussie! Bienvenue {{ user.username }}!
-    <form method="post" action="{% url 'common:connexion' %}">
-        {% csrf_token %}
-        <button type="submit" href = "/common/deconnexion/"/>Se déconnecter</button>
-    </form>
-    
-    {% else %}
-    <form class="formLogin" method="post" action=".">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Se connecter"/>
-    </form>
-    {% endif %}
-        
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Identification</h1>
+        </div>
+        <div class="form-container">
+            <button onclick="window.location.href='{% url 'common:register' %}'">S'inscrire</button>
+
+            {% if erreur %}
+            <p><strong>Connexion échouée</strong>
+            </p>
+            {% endif %} {% if user.is_authenticated %} Connexion réussie! Bienvenue {{ user.username }}!
+            <form method="post" action="{% url 'common:deconnexion' %}">
+                {% csrf_token %}
+                <button type="submit" />Se déconnecter</button>
+            </form>
+
+            {% else %}
+            <form class="formLogin" method="post" action=".">
+                {% csrf_token %} {{ form.as_p }}
+                <input type="hidden" name="next" value="{{ next_url }}" />
+                <input type="submit" value="Se connecter" />
+            </form>
+            {% endif %}
+
+        </div>
+    </div>
+
+
 </body>
+</html>
