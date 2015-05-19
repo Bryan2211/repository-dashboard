@@ -297,6 +297,15 @@
     </form>
     </tbody>
     </table>
+    <form class="inviteID" method="post" action=".">
+        {% csrf_token %}
+        <input class="btn btn-info" type="submit" name="createInviteID" value="Créer un lien d'invitation">
+    </form>
+    
+    {% if invmessage %}
+    <p>URL d'invitation: /dashboard/invite/{{ group.invite_id }}</p>
+    {% endif %}
+    
     </div>
     </div>
     </div>

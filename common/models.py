@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from random import randrange
 
 
 #Profile de base découlant de User
@@ -90,10 +91,19 @@ class Group(models.Model):
     homeworkCourse = models.ManyToManyField(Course, through = 'AssignHomework') #uniquement les devoirs quiz
     homeworkQuiz = models.ManyToManyField(Quiz, through = 'AssignHomework') #uniquement les devoirs cours
     created_on = models.DateTimeField(auto_now=True)
+    invite_id = models.CharField(max_length = 12, null = True)
+    used = []
     
     def __str__(self):
-        return"Classe {0}".format(self.name)
-
+        return"Groupe {0}".format(self.name)
+        
+    def random_id(self):
+        maximum = 999999999999
+        number = randrange(0, maximum)
+        while number in Group.used:
+            number = randrange(0, maximum)
+        Group.used += [number]
+        self.invite_id = number
 
 #Table intermédiaire pour affecter un membre à un groupe
 
