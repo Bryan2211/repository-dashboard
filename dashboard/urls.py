@@ -15,4 +15,5 @@ urlpatterns = patterns('teachers.views',
     url(r'^enlever_activité/(?P<activity_id>\d+)/$', deleteActivity, name = "deleteActivity"),
     #Pour retirer un devoir
     url(r'^enlever_devoir/(?P<group_id>\d+)/(?P<homework_id>\d+)/$', deleteHomework, name = "deleteHomework"),
+    url(r'^invite/(?P<invite_id>\d+)/$', inviteMember, name = "inviteMember"),
 )

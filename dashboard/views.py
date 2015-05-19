@@ -74,6 +74,7 @@ def group(request, group_id):
     homeworkCoList = group.homeworkCourse.all()  #
 
     deleteConfirmation = False #Pour supprimer une classe
+    invmessage = False
     
     if request.method == "POST":
         
@@ -153,6 +154,12 @@ def group(request, group_id):
             group.delete()
             return redirect('home')
             
+        elif 'createInviteID' in request.POST:
+            group = Group.objects.get(id = group_id)
+            number = group.random_id()
+            group.save()
+            invmessage = True
+            
         
         formStudent = NewStudentForm()
         formTeacher = NewTeacherForm()
@@ -231,3 +238,18 @@ def deleteHomework(request, group_id, homework_id):
             assignedHomework = assignedHomework[0]
             assignedHomework.delete()
     return redirect('group_view', group_id = group_id)
+    
+@login_required(login_url='/common/login/')
+def inviteMember(request, invite_id):
+    user = request.user
+    group = Group.objects.get(invite_id = invite_id)
+    try:
+        student = Student.objects.get(user = user)
+        memberToGroup = GroupMembers(student = student, group = group)
+        memberToGroup.save()
+    except Student.DoesNotExist:
+        teacher = Teacher.objects.get(user = user)
+        memberToGroup = GroupMembers(teacher = teacher, group = group)
+        memberToGroup.save()
+    return redirect('group_view', group_id = group.id)
+    
